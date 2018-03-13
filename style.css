@@ -8,11 +8,20 @@ body{
 	background-color: lightblue;
 }
 
+.cxdata {
+	max-width: 50rem;
+    margin: 60px auto;
+}
+
+.regbtn {
+	margin-bottom: 10px;
+}
+
 .form-registry{
 	width: 100%;
     max-width: 520px;
     padding: 15px;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 label.col-sm-4.col-form-label {
@@ -20,7 +29,7 @@ label.col-sm-4.col-form-label {
 }
 
 .form-title {
-	border: 2px solid black;
+	/*border: 2px solid black;*/
     color: #007aff;
 }
 

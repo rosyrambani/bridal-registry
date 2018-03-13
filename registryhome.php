@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION["sess_user"])){
-    header("location:login.php");
+    header("location:storelogin.php");
 } else {
 
 ?>
@@ -21,6 +21,20 @@ if(!isset($_SESSION["sess_user"])){
 		<title>Bowring Bridal Registry</title>
 	</head>
 	<body>
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">Bowring Bridal Registry</a>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="registryhome.php">Create New Registry</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="searchregistry.php">Search Registry</a>
+          </li>
+        </ul>
+          <a class="btn btn-outline-success my-2 my-sm-0" type="button" href="storelogout.php">Logout</a>
+      </div>
+    </nav>
 		<div class="text-center">
 			<form name="customerform" class="form-registry" method="post" action="customerdata.php">
 				<h2 class="form-title">Create Registry Account</h2>
@@ -78,16 +92,25 @@ if(!isset($_SESSION["sess_user"])){
 						<input type="text" name="employeename" class="form-control" placeholder="Enter Employee Name" required>
 					</div>
 				</div>
+				<button class="btn btn-lg btn-primary btn-block" type="button" id="gencode" name="gencode" value="GENERATE REGISTRY CODE" onclick="showCode()"><a>GENERATE REGISTRY CODE</a></button>
+				<div class="form-group form-registry" >
+				<!-- <label for="registrycode">Please Give This Registry Code To The Customer</label> -->
+				
+				<textarea class="form-control" name="registrycode" id="registrycode" rows="1" readonly style="display: none;"><?php echo uniqid(); ?></textarea>
+				
+			</div>
 				<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit" name="submit" value="LOGIN"><a>Create Registry</a></button>
+				
 			</form>
-			<!-- <div class="form-group form-registry">
-				<label for="registrycode">Please Give This Registry Code To The Customer</label>
-				
-				<textarea class="form-control" name="registrycode" id="registrycode" rows="1" readonly></textarea>
-				
-			</div> -->
+			
 			
 		</div>
+
+		<script type="text/javascript">
+			function showCode() {
+				document.getElementById("registrycode").style.display = "block";
+			}
+		</script>
 
 		<!-- <script type="text/javascript">
 			function clearForm(){

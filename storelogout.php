@@ -2,5 +2,5 @@
 session_start();
 unset($_SESSION['sess_user']);
 session_destroy();
-header("location:login.php");
+header("location:storelogin.php");
 ?>
