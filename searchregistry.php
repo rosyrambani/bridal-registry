@@ -1,18 +1,5 @@
 <?php
-$searchcon = mysqli_connect('localhost','root','');
-	if(!$searchcon)
-	{
-		echo 'Not Connected To Server';
-	}
-	if(!mysqli_select_db($searchcon,'bridalregistry'))
-	{
-		echo 'Database Not Selected';
-	}
-
-
-
-
-
+include('connect.php');
 
 ?>
 
@@ -48,25 +35,27 @@ $searchcon = mysqli_connect('localhost','root','');
 		</nav>
 		
 		<div class="text-center">
-			<form name="search" class="form-search" method="post" action="searchregistry.php">
+			<form name="search" class="form-search" method="post" action="dbsearch.php">
 				<h2 class="form-title">Search By Registry Code</h2>
 				<div class="form-group row">
-					
-					<input class="form-control col-sm-8" type="text" placeholder="Enter the Registry Code">
-					<button class="btn btn-warning col-sm-4" type="submit">Search</button>
+					<input class="form-control col-sm-8" type="text" name="searchcode" placeholder="Enter the Registry Code">
+					<button class="btn btn-warning col-sm-4" name="submitted" type="submit">Search</button>
 				</div>
 			</form>
-			<form name="customerform" class="form-registry" method="post" action="customerdata.php">
+
+			
+
+				<form name="customerform" class="form-registry" method="post" action="">
 				<h2 class="form-title">Search Results</h2>
 				
 				<div class="form-group row">
-					<label for="bride" class="col-sm-4 col-form-label">Bride's Name:</label>
+					<label for="bride" class="col-sm-4 col-form-label">Bride Name:</label>
 					<div class="col-sm-8">
-						<input type="text" name="bride" class="form-control" placeholder="Name of Bride" required autofocus>
+						<input type="text" name="bride" id="bride" class="form-control" placeholder="Name of Bride" required autofocus>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="groom" class="col-sm-4 col-form-label">Groom's Name:</label>
+					<label for="groom" class="col-sm-4 col-form-label">Groom Name:</label>
 					<div class="col-sm-8">
 						<input type="text" name="groom" class="form-control" placeholder="Name of Groom" required>
 					</div>
@@ -98,7 +87,7 @@ $searchcon = mysqli_connect('localhost','root','');
 				<div class="form-group row">
 					<label for="registrydate" class="col-sm-4 col-form-label">Date of Registry:</label>
 					<div class="col-sm-8">
-						<input type="Date" name="registrydate" class="form-control" placeholder="Enter Today's Date" required>
+						<input type="Date" name="registrydate" class="form-control" placeholder="Enter Today Date" required>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -116,7 +105,6 @@ $searchcon = mysqli_connect('localhost','root','');
 				<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit" name="submit" value="submit"><a>Update Registry</a></button>
 				
 			</form>
-			
 			
 		</div>
 		
