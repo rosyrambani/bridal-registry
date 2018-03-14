@@ -32,7 +32,7 @@ if(!isset($_SESSION["sess_user"])){
             <a class="nav-link" href="searchregistry.php">Search Registry</a>
           </li>
         </ul>
-          <a class="btn btn-outline-success my-2 my-sm-0" type="button" href="storelogout.php">Logout</a>
+          <button class="btn btn-danger" type="button"><a href="storelogout.php">Logout</a></button>
       </div>
     </nav>
 		<div class="text-center">
@@ -96,10 +96,10 @@ if(!isset($_SESSION["sess_user"])){
 				<div class="form-group form-registry" >
 				<!-- <label for="registrycode">Please Give This Registry Code To The Customer</label> -->
 				
-				<textarea class="form-control" name="registrycode" id="registrycode" rows="1" readonly style="display: none;"><?php echo uniqid(); ?></textarea>
+				<textarea class="form-control" name="registrycode" id="registrycode" rows="1" readonly style="display: none;" required></textarea>
 				
 			</div>
-				<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit" name="submit" value="LOGIN"><a>Create Registry</a></button>
+				<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit" name="submit" value="submit"><a>Create Registry</a></button>
 				
 			</form>
 			
@@ -107,8 +107,17 @@ if(!isset($_SESSION["sess_user"])){
 		</div>
 
 		<script type="text/javascript">
+
+			if(document.getElementById("registrycode").value == '')
+			{
+			    document.getElementById("submit").disabled = true;
+			}
+			
 			function showCode() {
+				var code = "<?php echo uniqid(); ?>";
 				document.getElementById("registrycode").style.display = "block";
+				document.getElementById("registrycode").value = code;
+				document.getElementById("submit").disabled = false;
 			}
 		</script>
 

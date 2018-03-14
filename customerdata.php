@@ -67,7 +67,7 @@
             <a class="nav-link" href="searchregistry.php">Search Registry</a>
           </li>
         </ul>
-          <a class="btn btn-outline-success my-2 my-sm-0" type="button" href="storelogout.php">Logout</a>
+          <button class="btn btn-danger" type="button"><a href="storelogout.php">Logout</a></button>
       </div>
     </nav>
 		<!-- <nav class="navbar navbar-dark bg-dark">
@@ -80,7 +80,8 @@
 			<div class="card-body text-success">
 				<div class="row">
 					<h5 class="card-title col-sm-4">Registry Code:</h5>
-					<p class="card-text col-sm-8 text-uppercase"><?php echo $RegistryCode;?></p>
+					<p class="card-text col-sm-4 text-uppercase" id="registry"><?php echo $RegistryCode;?></p>
+					<!-- <a class="btn btn-outline-success my-2 my-sm-0" type="button" id="copy" onclick="copyText()">Copy</a> -->
 				</div>
 				<div class="row">
 					<h5 class="card-title col-sm-4">Bride's Name:</h5>
@@ -118,26 +119,11 @@
 					<h5 class="card-title col-sm-4">Registry Taken By:</h5>
 					<p class="card-text col-sm-8"><?php echo $EmployeeName;?></p>
 				</div>
-				<p class="card-text">Please confirm with the customer that all the details above are correct.</p>
+				<p class="card-text">Please confirm with the customer that all the details above are correct. In case of any error, please copy the Registry Code and then click on Edit button below to edit the customer details.</p>
+				<button class="btn btn-lg btn-warning btn-block" type="button" id="edit" name="edit" value="edit"><a href="searchregistry.php">Edit Customer Details</a></button>
 			</div>
 		</div>
 		
-		<!-- <div class="form-group form-registry">
-				<label for="registrycode">Please Give This Registry Code To The Customer</label>
-				
-				<textarea class="form-control" name="registrycode" id="registrycode" rows="1" readonly></textarea>
-				
-		</div> -->
-		
-		
-		<!-- <script type="text/javascript">
-			function registrynumber(){
-				
-				alert("code");
-				
-				document.getElementById("registrycode").value = "demo";
-			}
-		</script> -->
 		<!-- Bootstrap jquery and js files -->
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
