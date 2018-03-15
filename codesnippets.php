@@ -37,3 +37,9 @@
 	header("url=searchregistry.php");
 	}
 ?>
+
+
+
+echo'<script> 
+							searchResult();
+						</script>';
