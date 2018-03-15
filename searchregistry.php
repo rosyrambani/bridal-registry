@@ -1,7 +1,11 @@
 <?php
-include('connect.php');
+session_start();
+if(!isset($_SESSION["sess_user"])){
+    header("location:storelogin.php");
+} else {
 
 ?>
+
 
 
 <!DOCTYPE html>
@@ -35,79 +39,134 @@ include('connect.php');
 		</nav>
 		
 		<div class="text-center">
-			<form name="search" class="form-search" method="post" action="dbsearch.php">
+			<form name="search" class="card form-search" method="post" action="">
 				<h2 class="form-title">Search By Registry Code</h2>
 				<div class="form-group row">
-					<input class="form-control col-sm-8" type="text" name="searchcode" placeholder="Enter the Registry Code">
-					<button class="btn btn-warning col-sm-4" name="submitted" type="submit">Search</button>
+					<input class="form-control col-sm-7" type="text" name="searchcode" placeholder="Enter the Registry Code">
+					<button class="btn btn-warning col-sm-4 offset-1" name="submitted" type="submit">Search</button>
 				</div>
 			</form>
+			<?php
+			//connect to the database
+			include('connect.php');
+			if (isset($_POST['submitted'])) {
 
-			
+				$SearchCode = $_POST['searchcode'];
+				$BrideDb = "";
+				$GroomDb = "";
+				$PhoneDb = "";
+				$EmailDb = "";
+				$WeddingDb = "";
+				$ShowersDb = "";
+				$RegistryDb = "";
+				$StoreDb = "";
+				$EmployeeDb = "";
 
-				<form name="customerform" class="form-registry" method="post" action="">
+				$query = "SELECT * FROM CUSTOMERINFO WHERE REGISTRYCODE = '$SearchCode'";
+				$result = mysqli_query($con, $query) or die('error getting data');
+
+				if(mysqli_num_rows($result) > 0) {
+
+					while($row = mysqli_fetch_assoc($result)) {
+						$SearchCode = $row['REGISTRYCODE'];
+						$BrideDb = $row['BRIDE'];
+						$GroomDb = $row['GROOM'];
+						$PhoneDb = $row['PHONE'];
+						$EmailDb = $row['EMAIL'];
+						$WeddingDb = $row['WEDDINGDATE'];
+						$ShowersDb = $row['SHOWERSDATE'];
+						$RegistryDb = $row['REGISTRYDATE'];
+						$StoreDb = $row['STORE'];
+						$EmployeeDb = $row['EMPLOYEENAME'];						
+	
+
+					}
+				}
+				else {
+    				echo "0 results";
+				}
+
+			}
+?>
+			<form name="updateform" id="updateform" class="card form-registry" method="post" action="searchregistry.php">
 				<h2 class="form-title">Search Results</h2>
 				
 				<div class="form-group row">
+					<label for="newregistrycode" class="col-sm-4 col-form-label">Registry Code:</label>
+					<div class="col-sm-8">
+						<input type="text" name="newregistrycode" class="form-control" placeholder="Registry Code" value="<?php echo $SearchCode;?>" required readonly>
+					</div>
+				</div>
+				<div class="form-group row">
 					<label for="bride" class="col-sm-4 col-form-label">Bride Name:</label>
 					<div class="col-sm-8">
-						<input type="text" name="bride" id="bride" class="form-control" placeholder="Name of Bride" required autofocus>
+						<input type="text" name="newbride" class="form-control" placeholder="Name of Bride" value="<?php echo $BrideDb;?>" required autofocus>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="groom" class="col-sm-4 col-form-label">Groom Name:</label>
 					<div class="col-sm-8">
-						<input type="text" name="groom" class="form-control" placeholder="Name of Groom" required>
+						<input type="text" name="newgroom" class="form-control" placeholder="Name of Groom" value="<?php echo $GroomDb;?>" required>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="phone" class="col-sm-4 col-form-label">Contact Number:</label>
 					<div class="col-sm-8">
-						<input type="text" name="phone" class="form-control" placeholder="Enter Phone Number" required>
+						<input type="text" name="newphone" class="form-control" placeholder="Enter Phone Number" value="<?php echo $PhoneDb;?>" required>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="email" class="col-sm-4 col-form-label">Contact Email:</label>
 					<div class="col-sm-8">
-						<input type="email" name="email" class="form-control" placeholder="Enter Contact Email">
+						<input type="email" name="newemail" class="form-control" placeholder="Enter Contact Email" value="<?php echo $EmailDb;?>">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="weddingdate" class="col-sm-4 col-form-label">Date of Wedding:</label>
 					<div class="col-sm-8">
-						<input type="Date" name="weddingdate" class="form-control" placeholder="Enter Wedding Date">
+						<input type="Date" name="newweddingdate" class="form-control" placeholder="Enter Wedding Date" value="<?php echo $WeddingDb;?>">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="showersdate" class="col-sm-4 col-form-label">Date of Showers:</label>
 					<div class="col-sm-8">
-						<input type="Date" name="showersdate" class="form-control" placeholder="Enter Showers Date">
+						<input type="Date" name="newshowersdate" class="form-control" placeholder="Enter Showers Date" value="<?php echo $ShowersDb;?>">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="registrydate" class="col-sm-4 col-form-label">Date of Registry:</label>
 					<div class="col-sm-8">
-						<input type="Date" name="registrydate" class="form-control" placeholder="Enter Today Date" required>
+						<input type="Date" name="newregistrydate" class="form-control" placeholder="Enter Today Date" value="<?php echo $RegistryDb;?>" required>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="store" class="col-sm-4 col-form-label">Store of Registry:</label>
 					<div class="col-sm-8">
-						<input type="text" name="store" class="form-control" placeholder="Enter Your Store Number" required>
+						<input type="text" name="newstore" class="form-control" placeholder="Enter Your Store Number" value="<?php echo $StoreDb;?>" required>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="employeename" class="col-sm-4 col-form-label">Registry Taken By:</label>
 					<div class="col-sm-8">
-						<input type="text" name="employeename" class="form-control" placeholder="Enter Employee Name" required>
+						<input type="text" name="newemployeename" class="form-control" placeholder="Enter Employee Name" value="<?php echo $EmployeeDb;?>" required>
 					</div>
 				</div>
-				<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit" name="submit" value="submit"><a>Update Registry</a></button>
+				<button class="btn btn-lg btn-primary btn-block" type="submit" id="update" name="update" value="update"><a>Update Registry</a></button>
 				
 			</form>
+
+			
+			
 			
 		</div>
 		
+		<script type="text/javascript">
+
+			function searchResult() {
+				document.getElementById("updateform").style.display = "block";
+			}
+		</script>
+
 		<!-- Bootstrap jquery and js files -->
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -115,3 +174,6 @@ include('connect.php');
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
 	</body>
 </html>
+<?php
+}
+?>

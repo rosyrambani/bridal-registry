@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<div class="text-center">
-			<form class="form-signin" method="POST" action="">
+			<form class="card form-signin" method="POST" action="">
 				<img src="bowring.png" style="width: 300px;">
 				<h2>Bridal Registry</h2>
 				<input type="text" name="storeuname" class="form-control" placeholder="Enter Your Store Username" required autofocus>
@@ -22,25 +22,7 @@
 			</form>
 
 			<?php
-
-			$host="localhost";
-			$user="root";
-			$password="";
-			$db="bridalregistry";
-			$logincon = mysqli_connect($host,$user,$password);
-
-			if(!$logincon)
-			{
-			echo 'Not Connected To Server';
-			}
-
-			if(!mysqli_select_db($logincon,'bridalregistry'))
-			{
-			echo 'Database Not Selected';
-			}
-
-			mysqli_select_db($logincon,"bridalregistry");
-
+			include ('connect.php');
 			if(isset($_POST["submit"])) {
 
 				if(!empty($_POST['storeuname']) && !empty($_POST['storepassword'])) {
@@ -49,7 +31,7 @@
 
 					$loginsql="select * from storelogin where STOREUNAME='".$StoreUname."'AND STOREPASSWORD='".$StorePassword."' limit 1";
 
-					$loginresult=mysqli_query($logincon,$loginsql);
+					$loginresult=mysqli_query($con,$loginsql);
 
 					if(mysqli_num_rows($loginresult)!=0){
 						while($row=mysqli_fetch_assoc($loginresult)) {
@@ -66,7 +48,9 @@
 						}
 					}
 					else {
-						echo "You Have Entered Incorrect Password";
+						echo '<div class="alert alert-danger" style="width: 400px; margin: 0 auto;" role="alert">
+  								You have entered incorrect password.
+							</div>';
 					}
 				}
 			}

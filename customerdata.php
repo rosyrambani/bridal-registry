@@ -1,14 +1,14 @@
 <?php
+session_start();
+if(!isset($_SESSION["sess_user"])){
+    header("location:storelogin.php");
+} else {
+
+?>
+
+<?php
 	
-	$con = mysqli_connect('localhost','root','');
-	if(!$con)
-	{
-		echo 'Not Connected To Server';
-	}
-	if(!mysqli_select_db($con,'bridalregistry'))
-	{
-		echo 'Database Not Selected';
-	}
+	include 'connect.php';
 	if (isset($_POST['submit'])) {
 	$Bride = $_POST['bride'];
 	$Groom = $_POST['groom'];
@@ -75,9 +75,9 @@
     Bootstrap
   </a>
 </nav> -->
-		<div class="card border-success mb-3 cxdata">
+		<div class="card border-dark mb-3 cxdata">
 			<div class="card-header">Registry Account Details</div>
-			<div class="card-body text-success">
+			<div class="card-body text-dark">
 				<div class="row">
 					<h5 class="card-title col-sm-4">Registry Code:</h5>
 					<p class="card-text col-sm-4 text-uppercase" id="registry"><?php echo $RegistryCode;?></p>
@@ -131,3 +131,6 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
 	</body>
 </html>
+<?php
+}
+?>

@@ -36,7 +36,7 @@ if(!isset($_SESSION["sess_user"])){
       </div>
     </nav>
 		<div class="text-center">
-			<form name="customerform" class="form-registry" method="post" action="customerdata.php">
+			<form name="customerform" class="card form-registry" method="post" action="customerdata.php">
 				<h2 class="form-title">Create Registry Account</h2>
 				<div class="form-group row">
 					<label for="bride" class="col-sm-4 col-form-label">Bride's Name:</label>
