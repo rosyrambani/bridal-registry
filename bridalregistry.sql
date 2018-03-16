@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 16, 2018 at 03:31 PM
+-- Generation Time: Mar 16, 2018 at 08:46 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -75,6 +75,43 @@ INSERT INTO `customerinfo` (`ID`, `BRIDE`, `GROOM`, `PHONE`, `EMAIL`, `WEDDINGDA
 (26, 'ds', 'fs', 'fvd', 'test@testing.com', '2018-03-01', '2018-03-08', '2018-03-16', 'ds', 'sdf', '5aa83408a62dd'),
 (34, 'amit', 'dfbdb', 'dfbdf', 'test@testing.com', '', '', '2018-03-16', 'dfdf', 'dfdf', '5aabd70892dea'),
 (33, 'MEGHA', 'VISHAL', '3065018449', 'rosys9319@gmail.com', '2018-03-16', '2018-03-16', '2018-03-16', '1234', 'Rosy', '5aabd185d2f7c');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customerproducts`
+--
+
+DROP TABLE IF EXISTS `customerproducts`;
+CREATE TABLE IF NOT EXISTS `customerproducts` (
+  `ID` int(20) NOT NULL AUTO_INCREMENT,
+  `REGCODE` varchar(20) NOT NULL,
+  `SKUNUMBER` varchar(20) NOT NULL,
+  `DESCRIPTION` varchar(50) NOT NULL,
+  `QUANTITY` varchar(20) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customerproducts`
+--
+
+INSERT INTO `customerproducts` (`ID`, `REGCODE`, `SKUNUMBER`, `DESCRIPTION`, `QUANTITY`) VALUES
+(1, '5aaa76aee4482', '123456', 'table', '5'),
+(2, '5aa6e290a8f0c', '099887767', 'chair', '3'),
+(3, '5aaa76aee4482', 'dgfd', 'dfgdf', 'dfgdf'),
+(4, '5aaa76aee4482', 'dgfd', 'dfgdf', 'dfgdf'),
+(5, '', 'dgfd', 'dfgdf', 'dfgdf'),
+(6, '', 'fddf', 'efgdg', 'dfgfd'),
+(7, '5aaa76aee4482', 'fddf', 'efgdg', 'dfgfd'),
+(8, '', '356346', 'FGHDFG', '5'),
+(9, '5aaa76aee4482', '356346', 'FGHDFG', '5'),
+(10, '5aa6e290a8f0c', 'FDF', 'DFDF', 'FDDF'),
+(11, '5aa6e290a8f0c', 'FDF', 'DFDF', 'FDDF'),
+(12, '5aa6e290a8f0c', 'FDF', 'DFDF', 'FDDF'),
+(13, '5aa6e290a8f0c', 'ghjkjjk6', 'gyjjkjk', 'THJJJ'),
+(14, '5aa6e290a8f0c', 'ghjkjjk6', 'gyjjkjk', 'THJJJ'),
+(15, '5aa6e290a8f0c', 'dssdgfsd', 'sdsd', 'sdsdfsdfsdds');
 
 -- --------------------------------------------------------
 

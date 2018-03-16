@@ -90,7 +90,7 @@ if(!isset($_SESSION["sess_user"])){
       document.getElementById("newregistrydate").value = "<?php echo $RegistryDb;?>";
       document.getElementById("newstore").value = "<?php echo $StoreDb;?>";
       document.getElementById("newemployeename").value = "<?php echo $EmployeeDb;?>";
-      
+      document.getElementById("regcode").value = "<?php echo $SearchCode;?>";
       }
       </script>
       <?php
@@ -160,12 +160,30 @@ if(!isset($_SESSION["sess_user"])){
           </div>
         </div>
       </form>
-
+      <form name="updateform" id="updateform" class="card form-addsku" method="post" action="cxproductdb.php">
+        <h3 class="form-title">Add Product Details Here</h3>
+        
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <input type="text" name="regcode" id="regcode" class="form-control" placeholder="Registry Code" required readonly>
+          </div>
+          <div class="col-sm-3">
+            <input type="text" name="skunumber" id="skunumber" class="form-control" placeholder="Product SKU" required>
+          </div>
+          <div class="col-sm-3">
+            <input type="text" name="description" id="description" class="form-control" placeholder="Product Description" required>
+          </div>
+          <div class="col-sm-3">
+            <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Product Quantity" required>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-block" type="submit" id="productadd" name="productadd" value="update"><a>Add Above Products to Registry</a></button>
+      </form>
 
       <script>
         searchResult();
       </script>
-
+      
 
 
       ';
@@ -182,55 +200,9 @@ if(!isset($_SESSION["sess_user"])){
       }
       ?>
 
-      <form name="updateform" id="updateform" class="card form-addsku" method="post" action="addproducts.php">
-        <h3 class="form-title">Add Product Details Here</h3>
-        
-        <div class="form-group row">
-          <div class="col-sm-3">
-            <input type="text" name="regcode" id="regcode" class="form-control" placeholder="Registry Code" value="<?php echo $SearchCode;?>" required readonly>
-          </div>
-          <div class="col-sm-3">
-            <input type="text" name="skunumber" id="skunumber" class="form-control" placeholder="Product SKU" required>
-          </div>
-          <div class="col-sm-3">
-            <input type="text" name="description" id="description" class="form-control" placeholder="Product Description" required>
-          </div>
-          <div class="col-sm-3">
-            <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Product Quantity" required>
-          </div>
-        </div>
-        <button class="btn btn-primary btn-block" type="submit" id="productadd" name="productadd" value="update"><a>Add Above Products to Registry</a></button>
-      </form>
+      
   
-  <?php
-  include 'connect.php';
-  if (isset($_POST['productadd'])) {
-  $RegCode = $_POST['regcode'];
-  $SkuNumber = $_POST['skunumber'];
-  $Description = $_POST['description'];
-  $Quantity = $_POST['quantity'];
-  
-  $sql = "INSERT INTO CUSTOMERPRODUCTS (REGCODE, SKUNUMBER, DESCRIPTION, QUANTITY) VALUES ('$RegCode', '$SkuNumber', '$Description', '$Quantity')";
-  if(!mysqli_query($con, $sql))
-  {
-    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Sorry, Data was not saved to the Database!</strong>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>';
-  }
-  else
-  {
-      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Data Successfully Saved to the Database!</strong>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>';
-  }
-  }
-?>
+
 
 
     </div>
