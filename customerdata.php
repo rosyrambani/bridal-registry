@@ -66,6 +66,9 @@ if(!isset($_SESSION["sess_user"])){
           <li class="nav-item active">
             <a class="nav-link" href="searchregistry.php">Search Registry</a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="addproducts.php">Add Products to Registry</a>
+          </li>
         </ul>
           <button class="btn btn-danger" type="button"><a href="storelogout.php">Logout</a></button>
       </div>

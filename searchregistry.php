@@ -4,8 +4,8 @@ if(!isset($_SESSION["sess_user"])){
 header("location:storelogin.php");
 } else {
 ?>
+
 <?php
-	
 	include ('connect.php');
 	if (isset($_POST['update'])) {
 	$NewBride = $_POST['newbride'];
@@ -66,6 +66,9 @@ header("location:storelogin.php");
 					<li class="nav-item active">
 						<a class="nav-link" href="searchregistry.php">Search Registry</a>
 					</li>
+					<li class="nav-item active">
+            			<a class="nav-link" href="addproducts.php">Add Products to Registry</a>
+          			</li>
 				</ul>
 				<button class="btn btn-danger" type="button"><a href="storelogout.php">Logout</a></button>
 				
@@ -205,7 +208,12 @@ header("location:storelogin.php");
 			}
 			}
 			else {
-			echo "0 results";
+			echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Make Sure you have entered right Registry Code</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>';
 			}
 			}
 			?>

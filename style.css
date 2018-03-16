@@ -38,6 +38,18 @@ h2 {
     margin: 10px auto;
 }
 
+.form-addsku {
+  width: 100%;
+  max-width: 800px;
+  padding: 15px;
+  margin: 10px auto;
+}
+
+button#productadd {
+    width: 40%;
+    margin: 0 auto;
+}
+
 .form-search{
 	width: 100%;
     max-width: 525px;
