@@ -43,3 +43,10 @@
 echo'<script> 
 							searchResult();
 						</script>';
+
+
+
+				$sqldb = "UPDATE CUSTOMERINFO SET BRIDE = '$NewBride', GROOM = '$NewGroom', PHONE = '$NewPhone', EMAIL = '$NewEmail', WEDDINGDATE = '$NewWeddingDate', SHOWERSDATE = '$NewShowersDate', REGISTRYDATE = '$NewRegistryDate', STORE = '$NewStore', EMPLOYEENAME = '$NewEmployeeName' WHERE REGISTRYCODE = '$RegistryCode'";
+
+
+				$sqlupdate = "UPDATE CUSTOMERINFO SET (BRIDE, GROOM, PHONE, EMAIL, WEDDINGDATE, SHOWERSDATE, REGISTRYDATE, STORE, EMPLOYEENAME) VALUES ('$NewBride', '$NewGroom', '$NewPhone', '$NewEmail', '$NewWeddingDate', '$NewShowersDate', '$NewRegistryDate', '$NewStore', '$NewEmployeeName')";
