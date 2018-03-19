@@ -9,6 +9,9 @@ if(!isset($_SESSION["sess_user"])){
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- disallow browser cache -->
+    <meta HTTP-EQUIV="Pragma" content="no-cache">
+    <meta HTTP-EQUIV="Expires" content="-1" >
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -46,6 +49,38 @@ if(!isset($_SESSION["sess_user"])){
           <button class="btn btn-warning col-sm-4 offset-1" name="addsku" type="submit">Search</button>
         </div>
       </form>
+
+      
+      <?php
+  include 'connect.php';
+  if (isset($_POST['productadd'])) {
+  $RegCode = $_POST['regcode'];
+  $SkuNumber = $_POST['skunumber'];
+  $Description = $_POST['description'];
+  $Quantity = $_POST['quantity'];
+  
+  $sql = "INSERT INTO CUSTOMERPRODUCTS (REGISTRYCODE, SKUNUMBER, DESCRIPTION, QUANTITY) VALUES ('$RegCode', '$SkuNumber', '$Description', '$Quantity')";
+  if(!mysqli_query($con, $sql))
+  {
+    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Sorry, Data was not saved to the Database!</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>';
+  }
+  else
+  {
+      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Data Successfully Saved to the Database!</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>';
+  }
+  header('url:addproducts.php');
+  }
+?>
 
       <?php
       //connect to the database
@@ -93,10 +128,25 @@ if(!isset($_SESSION["sess_user"])){
       document.getElementById("regcode").value = "<?php echo $SearchCode;?>";
       }
       </script>
+
+      <script type="text/javascript">
+
+        var num = 1;
+        function addProductRow() {
+
+          
+          var e = $('<div class="form-group row"><div class="col-sm-4"><input type="text" name="skunumber" id="skunumber" class="form-control" placeholder="Product SKU" required></div><div class="col-sm-4"><input type="text" name="description" id="description" class="form-control" placeholder="Product Description" required></div><div class="col-sm-4"><input type="text" name="quantity" id="quantity" class="form-control" placeholder="Product Quantity" required></div></div>');
+            $('#productRow').append(e);
+            e.attr('id', 'newProductRow');
+            num += 1;
+            // alert(num);
+            console.log(num);
+            }
+      </script>
       <?php
       echo'
 
-        <form name="updateform" id="updateform" class="card form-registry" method="post" action="searchregistry.php">
+        <form name="updateform" id="updateform" class="card form-registry" method="post" action="">
         <h2 class="form-title">Search Results</h2>
         
         <div class="form-group row">
@@ -160,33 +210,39 @@ if(!isset($_SESSION["sess_user"])){
           </div>
         </div>
       </form>
-      <form name="updateform" id="updateform" class="card form-addsku" method="post" action="cxproductdb.php">
+      <form name="updateform" id="updateform" class="card form-addsku" method="post" action="addproducts.php">
         <h3 class="form-title">Add Product Details Here</h3>
-        
+        <div class="row">
+        <div class="col-sm-4">
+          <label for="regcode" class="form-label">Registry Code:</label>
+        </div>
+        <div class="col-sm-4">
+          <input type="text" name="regcode" id="regcode" class="form-control" placeholder="Registry Code" required readonly>
+        </div>
+        <button class="btn btn-success col-sm-4" name="addRow" onClick="addProductRow()" type="submit">Add Row to Enter Product</button>
+        </div>
+        <br>
+        <div id="productRow">
         <div class="form-group row">
-          <div class="col-sm-3">
-            <input type="text" name="regcode" id="regcode" class="form-control" placeholder="Registry Code" required readonly>
-          </div>
-          <div class="col-sm-3">
+          
+          <div class="col-sm-4">
             <input type="text" name="skunumber" id="skunumber" class="form-control" placeholder="Product SKU" required>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-4">
             <input type="text" name="description" id="description" class="form-control" placeholder="Product Description" required>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-4">
             <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Product Quantity" required>
           </div>
         </div>
+        </div>
+        
         <button class="btn btn-primary btn-block" type="submit" id="productadd" name="productadd" value="update"><a>Add Above Products to Registry</a></button>
       </form>
 
       <script>
         searchResult();
-      </script>
-      
-
-
-      ';
+      </script>';
       }
       }
       else {
@@ -199,12 +255,6 @@ if(!isset($_SESSION["sess_user"])){
       }
       }
       ?>
-
-      
-  
-
-
-
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

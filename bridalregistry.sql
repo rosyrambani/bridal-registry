@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 16, 2018 at 08:46 PM
+-- Generation Time: Mar 19, 2018 at 08:20 PM
 -- Server version: 5.7.19
 -- PHP Version: 5.6.31
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `customerinfo` (
   `REGISTRYCODE` varchar(50) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `REGISTRYCODE` (`REGISTRYCODE`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customerinfo`
@@ -54,26 +54,15 @@ INSERT INTO `customerinfo` (`ID`, `BRIDE`, `GROOM`, `PHONE`, `EMAIL`, `WEDDINGDA
 (2, 'Ellen', 'Peter', '121424255', 'ellen@gmail.com', '2018-08-22', '2018-08-03', '2018-03-12', '456', 'Sandra', '5aa6d2a449075'),
 (3, 'Nancy', 'Steve', '13245765432', 'nancy@gmail.com', '2018-05-17', '2018-05-08', '2018-03-12', '876', 'Brandon', '5aa6e220975d0'),
 (4, 'Sia', 'Greg', '573420320sdfsd', 'sia@gmail.com', '2018-03-17', '2018-03-11', '2018-03-12', '1234', 'Rosy', '5aa6e290a8f0c'),
-(6, 'fdssdgd', 'gsdg', 'sdf134324', 'test@testing.com', '2018-03-03', '2018-03-01', '2018-03-17', '423', 'dfgsdf', '5aa6e406347f8'),
 (7, 'ana', 'mark', '347341983', 'testing@test.com', '2018-03-17', '2018-03-16', '2018-03-13', '432', 'Rosy', '5aa7e3f2dfff8'),
-(8, 'ana', 'mark', '347341983', 'testing@test.com', '2018-03-17', '2018-03-16', '2018-03-13', '432', 'Rosy', '5aa7e4a824998'),
-(9, 'jjsdk', 'dkfkks', '23576543', 'testing@test.com', '2018-03-17', '2018-03-22', '2018-03-13', '2334', 'afgdfgdf', '5aa7e4ed49556'),
-(10, 'jjsdk', 'dkfkks', '23576543', 'testing@test.com', '2018-03-17', '2018-03-22', '2018-03-13', '2334', 'afgdfgdf', '5aa7e50451f85'),
-(11, 'jjsdk', 'dkfkks', '23576543', 'testing@test.com', '2018-03-17', '2018-03-22', '2018-03-13', '2334', 'afgdfgdf', '5aa7e57e0bc2b'),
 (12, 'abcd', 'efgh', 'ijkl', 'mnop@gmail.com', '2018-03-13', '2018-03-13', '2018-03-13', 'qrst', 'uvwxyz', '5aa7e974dca1b'),
 (13, 'demo', 'demo', 'demo', 'demo@test.com', '2018-03-13', '2018-03-13', '2018-03-13', 'demo', 'demo', '5aa7f9a032dfc'),
 (32, 'megha', 'megha', 'megha', 'megha@gmail.com', '2018-03-16', '2018-03-16', '2018-03-16', '9999', 'rosy', '5aaacceb89f32'),
 (31, 'ana', 'ana', 'ana', 'test@testing.com', '2018-03-13', '2018-03-13', '2018-03-14', '12334', 'rosy', '5aaa92e1c9eac'),
 (30, 'ana', 'ana', 'ana', 'test@testing.com', '2018-03-13', '2018-03-13', '2018-03-14', '12334', 'rosy', '5aaa924abb5d3'),
-(29, 'dsvds', 'svsd', 'svd', 'rrambani@fluidbrands.ca', '2018-03-08', '2018-03-16', '2018-03-15', '322', 'sfdfgfdg', '5aaa8094e3e09'),
 (28, 'maya', 'maya', '4567896-543567665', 'maya@gmail.com', '2018-03-15', '2018-03-16', '2018-03-16', '2342', 'maya', '5aaa76aee4482'),
-(27, 'ajsdfvj', 'dfjvk', 'dfdkja', 'test@testing.com', '', '', '2018-03-13', 'sfga', 'fdsgdg', '5aa808bbc211c'),
 (22, 'rosy', 'rosy', 'rosy', 'rosys9319@gmail.com', '2018-03-07', '2018-03-31', '2018-03-08', '4566', 'Rosy', '5aa826cb81938'),
 (23, 'rosy', 'rosy', 'rosy', 'rosys9319@gmail.com', '2018-03-07', '2018-03-31', '2018-03-08', '4566', 'Rosy', '5aa828ac54950'),
-(24, 'sdfsad', 'dfasd', 'fgasd', 'test@testing.com', '2018-03-17', '2018-03-17', '2018-03-15', 'dsdfs', 'sdfs', '5aa82abcb1725'),
-(25, 'ds', 'fs', 'fvd', 'test@testing.com', '2018-03-01', '2018-03-08', '2018-03-16', 'ds', 'sdf', '5aa82b1c1da5f'),
-(26, 'ds', 'fs', 'fvd', 'test@testing.com', '2018-03-01', '2018-03-08', '2018-03-16', 'ds', 'sdf', '5aa83408a62dd'),
-(34, 'amit', 'dfbdb', 'dfbdf', 'test@testing.com', '', '', '2018-03-16', 'dfdf', 'dfdf', '5aabd70892dea'),
 (33, 'MEGHA', 'VISHAL', '3065018449', 'rosys9319@gmail.com', '2018-03-16', '2018-03-16', '2018-03-16', '1234', 'Rosy', '5aabd185d2f7c');
 
 -- --------------------------------------------------------
@@ -85,33 +74,36 @@ INSERT INTO `customerinfo` (`ID`, `BRIDE`, `GROOM`, `PHONE`, `EMAIL`, `WEDDINGDA
 DROP TABLE IF EXISTS `customerproducts`;
 CREATE TABLE IF NOT EXISTS `customerproducts` (
   `ID` int(20) NOT NULL AUTO_INCREMENT,
-  `REGCODE` varchar(20) NOT NULL,
+  `REGISTRYCODE` varchar(20) NOT NULL,
   `SKUNUMBER` varchar(20) NOT NULL,
   `DESCRIPTION` varchar(50) NOT NULL,
   `QUANTITY` varchar(20) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `customerproducts`
 --
 
-INSERT INTO `customerproducts` (`ID`, `REGCODE`, `SKUNUMBER`, `DESCRIPTION`, `QUANTITY`) VALUES
+INSERT INTO `customerproducts` (`ID`, `REGISTRYCODE`, `SKUNUMBER`, `DESCRIPTION`, `QUANTITY`) VALUES
 (1, '5aaa76aee4482', '123456', 'table', '5'),
 (2, '5aa6e290a8f0c', '099887767', 'chair', '3'),
-(3, '5aaa76aee4482', 'dgfd', 'dfgdf', 'dfgdf'),
 (4, '5aaa76aee4482', 'dgfd', 'dfgdf', 'dfgdf'),
-(5, '', 'dgfd', 'dfgdf', 'dfgdf'),
-(6, '', 'fddf', 'efgdg', 'dfgfd'),
 (7, '5aaa76aee4482', 'fddf', 'efgdg', 'dfgfd'),
-(8, '', '356346', 'FGHDFG', '5'),
+(40, '5aaa76aee4482', '333', '333', '333'),
 (9, '5aaa76aee4482', '356346', 'FGHDFG', '5'),
-(10, '5aa6e290a8f0c', 'FDF', 'DFDF', 'FDDF'),
 (11, '5aa6e290a8f0c', 'FDF', 'DFDF', 'FDDF'),
-(12, '5aa6e290a8f0c', 'FDF', 'DFDF', 'FDDF'),
-(13, '5aa6e290a8f0c', 'ghjkjjk6', 'gyjjkjk', 'THJJJ'),
 (14, '5aa6e290a8f0c', 'ghjkjjk6', 'gyjjkjk', 'THJJJ'),
-(15, '5aa6e290a8f0c', 'dssdgfsd', 'sdsd', 'sdsdfsdfsdds');
+(15, '5aa6e290a8f0c', 'dssdgfsd', 'sdsd', 'sdsdfsdfsdds'),
+(16, '5aa6e290a8f0c', 'cdvsdf', 'sdfsd', 'sdsd'),
+(17, '5aaacceb89f32', 'sdfsdf', 'sdsdsdfd', '23322343'),
+(18, '5aaa76aee4482', '444454', 'table', '5'),
+(19, '5aa6e290a8f0c', '11111111', 'sofa', '1'),
+(20, '5aafc4773b8cf', '999999', 'chair', '3'),
+(44, '5aa6e290a8f0c', '555', '555', '555'),
+(45, '5aa6e290a8f0c', '00', '00', '00'),
+(49, '5aaa76aee4482', '321', '321', '321'),
+(50, '5aaa76aee4482', '1', '1', '1');
 
 -- --------------------------------------------------------
 
