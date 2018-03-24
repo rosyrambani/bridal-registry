@@ -114,31 +114,37 @@ header("location:storelogin.php");
         $('#' + delete_row).remove();
       });
 
-      $('#productadd').click(function(){
+      $('#updateform').submit(function(e){
+        e.preventDefault();
+        // console.log("loju");
         var item_regcode = [];
         var item_sku = [];
         var item_description = [];
         var item_quantity = [];
-        $('.item_regcode').each(function(){
-          item_regcode.push($(this).text());
-        });
-        $('.item_sku').each(function(){
-          item_sku.push($(this).text());
+          
+        $('.item_sku').each(function(i){
+          item_regcode.push($('.item_regcode').val());
+          item_sku.push($(this).val());
+          // console.log($(this).val());
         });
         $('.item_description').each(function(){
-          item_description.push($(this).text());
+          item_description.push($(this).val());
+                    // console.log($(this).val());
         });
         $('.item_quantity').each(function(){
-          item_quantity.push($(this).text());
+          item_quantity.push($(this).val());
+                    // console.log($(this).val());
         });
+        console.log(item_regcode, item_sku, item_description, item_quantity);
+        var bhoja = {item_regcode:item_regcode, item_sku:item_sku, item_description:item_description, item_quantity:item_quantity} ;
+        console.log(bhoja);
         $.ajax({
 
           url:"insert.php",
           method:"POST",
-          data:{item_regcode:item_regcode, item_sku:item_sku, item_description:item_description, item_quantity:item_quantity},
+          data:bhoja,
           success:function(data){
-            alert(data);
-           
+           alert(data);
           }
         });
       });
@@ -151,7 +157,7 @@ header("location:storelogin.php");
       
       <?php
       echo'
-      <form name="updateform" id="updateform" class="card form-registry" method="post" action="">
+      <form name="regdetails" id="regdetails" class="card form-registry">
         <h2 class="form-title">Search Results</h2>
         
         <div class="form-group row">
@@ -215,7 +221,7 @@ header("location:storelogin.php");
           </div>
         </div>
       </form>
-      <form name="updateform" id="updateform" class="card form-addsku" method="post" action="">
+      <form name="updateform" id="updateform" class="card form-addsku">
         <h3 class="form-title">Add Product Details Here</h3>
         <div class="row">
           <div class="col-sm-4">

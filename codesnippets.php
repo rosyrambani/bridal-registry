@@ -239,3 +239,11 @@ echo'<script>
       header('url:addproducts.php');
       }
       ?>
+
+
+      $item_regcode = ['sahil' , 'kutta'];
+$i = sizeOf($item_regcode);
+while($i+1){
+echo $item_regcode[$i];
+$i--;
+}
