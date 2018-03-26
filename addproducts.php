@@ -16,10 +16,7 @@ header("location:storelogin.php");
     <meta name="description" content="Bridal Registry Website">
     <meta name="author" content="Rosy Rambani">
     <!-- Bootstrap CSS -->
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Bowring Bridal Registry</title>
@@ -114,33 +111,43 @@ header("location:storelogin.php");
         $('#' + delete_row).remove();
       });
 
-      $('#productadd').click(function(){
+
+      $('#updateform').submit(function(e){
+        e.preventDefault();
+        console.log("loju");
         var item_regcode = [];
         var item_sku = [];
         var item_description = [];
         var item_quantity = [];
+
         $('.item_regcode').each(function(){
-          item_regcode.push($(this).text());
+          item_regcode.push($(this).val());
         });
         $('.item_sku').each(function(){
-          item_sku.push($(this).text());
+          item_sku.push($(this).val());
         });
         $('.item_description').each(function(){
-          item_description.push($(this).text());
+          item_description.push($(this).val());
         });
         $('.item_quantity').each(function(){
-          item_quantity.push($(this).text());
+          item_quantity.push($(this).val());
         });
+        console.log(item_regcode, item_sku, item_description, item_quantity);
+        var newProducts = {item_regcode:item_regcode, item_sku:item_sku, item_description:item_description, item_quantity:item_quantity} ;
+        console.log(newProducts);
+
         $.ajax({
 
-          url:"insert.php",
-          method:"POST",
-          data:{item_regcode:item_regcode, item_sku:item_sku, item_description:item_description, item_quantity:item_quantity},
-          success:function(data){
+          url: "insert.php",
+          method: "POST",
+          data: newProducts,
+          success: function(data){
             alert(data);
            
           }
+
         });
+
       });
 
 
@@ -151,7 +158,7 @@ header("location:storelogin.php");
       
       <?php
       echo'
-      <form name="updateform" id="updateform" class="card form-registry" method="post" action="">
+      <form name="regdetails" id="regdetails" class="card form-registry">
         <h2 class="form-title">Search Results</h2>
         
         <div class="form-group row">
@@ -215,13 +222,13 @@ header("location:storelogin.php");
           </div>
         </div>
       </form>
-      <form name="updateform" id="updateform" class="card form-addsku" method="post" action="">
+      <form name="updateform" id="updateform" class="card form-addsku">
         <h3 class="form-title">Add Product Details Here</h3>
         <div class="row">
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <label for="regcode" class="form-label">Registry Code:</label>
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <input type="text" name="regcode" id="regcode" class="form-control item_regcode" placeholder="Registry Code" required readonly>
           </div>
           <button class="btn btn-success col-sm-4" name="addRow" id="addRow" type="button">Add Row to Enter Product</button>
@@ -244,6 +251,7 @@ header("location:storelogin.php");
         
         <button class="btn btn-primary btn-block" type="submit" id="productadd" name="productadd"><a>Add Above Products to Registry</a></button>
       </form>
+      <span id="insertresult"></span>
       <script>
       searchResult();
       </script>';
