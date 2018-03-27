@@ -51,6 +51,7 @@ header("location:storelogin.php");
 		<meta name="description" content="Bridal Registry Website">
 		<meta name="author" content="Rosy Rambani">
 		<!-- Bootstrap CSS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<title>Bowring Bridal Registry</title>
@@ -60,17 +61,21 @@ header("location:storelogin.php");
 			<a class="navbar-brand" href="#">Bowring Bridal Registry</a>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="registryhome.php">Create New Registry</a>
-					</li>
-					<li class="nav-item active">
-						<a class="nav-link" href="searchregistry.php">Search Registry</a>
-					</li>
-					<li class="nav-item active">
-            			<a class="nav-link" href="addproducts.php">Add Products to Registry</a>
-          			</li>
-				</ul>
-				<button class="btn btn-danger" type="button"><a href="storelogout.php">Logout</a></button>
+          <li class="nav-item active">
+            <a class="nav-link" href="registryhome.php">1. Create New Registry</a>
+          </li>
+          
+          <li class="nav-item active">
+            <a class="nav-link" href="addproducts.php">2. Add Products to Registry</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="searchregistry.php">3. Search and Edit Registry</a>
+          </li>
+        </ul>
+				<div class="btn-group" role="group">
+    				<a class="button btn btn-warning" href="blank_Bridal_Registry.pdf" target="_blank">Print Registry Form</a>
+    				<a class="button btn btn-danger" href="storelogout.php">Logout</a>
+  				</div>
 				
 			</div>
 		</nav>
@@ -223,7 +228,6 @@ header("location:storelogin.php");
 		
 		
 		<!-- Bootstrap jquery and js files -->
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>

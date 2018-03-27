@@ -1,6 +1,6 @@
 <?php 
 include 'connect.php';
-if(isset($_POST['productadd'])) {
+if(isset($_POST['item_regcode'])) {
   $item_regcode = $_POST["item_regcode"];
   $item_sku = $_POST["item_sku"];
   $item_description = $_POST["item_description"];

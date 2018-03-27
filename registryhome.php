@@ -1,12 +1,9 @@
 <?php
 session_start();
 if(!isset($_SESSION["sess_user"])){
-    header("location:storelogin.php");
+header("location:storelogin.php");
 } else {
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -22,22 +19,27 @@ if(!isset($_SESSION["sess_user"])){
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Bowring Bridal Registry</a>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="registryhome.php">Create New Registry</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="searchregistry.php">Search Registry</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="addproducts.php">Add Products to Registry</a>
-          </li>
-        </ul>
-          <button class="btn btn-danger" type="button"><a href="storelogout.php">Logout</a></button>
-      </div>
-    </nav>
+			<a class="navbar-brand" href="#">Bowring Bridal Registry</a>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="registryhome.php">1. Create New Registry</a>
+					</li>
+					
+					<li class="nav-item active">
+						<a class="nav-link" href="addproducts.php">2. Add Products to Registry</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="searchregistry.php">3. Search and Edit Registry</a>
+					</li>
+				</ul>
+				<div class="btn-group" role="group">
+					<a class="button btn btn-warning" href="blank_Bridal_Registry.pdf" target="_blank">Print Registry Form</a>
+					<a class="button btn btn-danger" href="storelogout.php">Logout</a>
+				</div>
+				
+			</div>
+		</nav>
 		<div class="text-center">
 			<form name="customerform" class="card form-registry" method="post" action="customerdata.php">
 				<h2 class="form-title">Create Registry Account</h2>
@@ -97,39 +99,35 @@ if(!isset($_SESSION["sess_user"])){
 				</div>
 				<button class="btn btn-lg btn-primary btn-block" type="button" id="gencode" name="gencode" value="GENERATE REGISTRY CODE" onclick="showCode()"><a>GENERATE REGISTRY CODE</a></button>
 				<div class="form-group form-registry" >
-				<!-- <label for="registrycode">Please Give This Registry Code To The Customer</label> -->
-				
-				<textarea class="form-control" name="registrycode" id="registrycode" rows="1" readonly style="display: none;" required></textarea>
-				
-			</div>
+					<!-- <label for="registrycode">Please Give This Registry Code To The Customer</label> -->
+					
+					<textarea class="form-control" name="registrycode" id="registrycode" rows="1" readonly style="display: none;" required></textarea>
+					
+				</div>
 				<button class="btn btn-lg btn-primary btn-block" type="submit" id="submit" name="submit" value="submit"><a>Create Registry</a></button>
 				
 			</form>
 			
 			
 		</div>
-
 		<script type="text/javascript">
-
 			if(document.getElementById("registrycode").value == '')
 			{
-			    document.getElementById("submit").disabled = true;
+			document.getElementById("submit").disabled = true;
 			}
 			
 			function showCode() {
-				var code = "<?php echo uniqid(); ?>";
-				document.getElementById("registrycode").style.display = "block";
-				document.getElementById("registrycode").value = code;
-				document.getElementById("submit").disabled = false;
-			}
+		var code = "<?php echo uniqid(); ?>";
+		document.getElementById("registrycode").style.display = "block";
+		document.getElementById("registrycode").value = code;
+		document.getElementById("submit").disabled = false;
+		}
 		</script>
-
 		<!-- <script type="text/javascript">
 			function clearForm(){
 				document.customerform.reset();
 			}
 		</script> -->
-
 		<!-- Bootstrap jquery and js files -->
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

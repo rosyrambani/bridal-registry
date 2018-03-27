@@ -1,11 +1,9 @@
 <?php
 session_start();
 if(!isset($_SESSION["sess_user"])){
-    header("location:storelogin.php");
+header("location:storelogin.php");
 } else {
-
 ?>
-
 <?php
 	
 	include 'connect.php';
@@ -24,19 +22,19 @@ if(!isset($_SESSION["sess_user"])){
 	if(!mysqli_query($con, $sql))
 	{
 		echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Sorry, Data was not saved to the Database!</strong>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
+	<strong>Sorry, Data was not saved to the Database!</strong>
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	<span aria-hidden="true">&times;</span>
+	</button>
 </div>';
 	}
 	else
 	{
 			echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Data Successfully Saved to the Database!</strong>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
+	<strong>Data Successfully Saved to the Database!</strong>
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	<span aria-hidden="true">&times;</span>
+	</button>
 </div>';
 	}
 	header("url=customerdata.php");
@@ -51,40 +49,48 @@ if(!isset($_SESSION["sess_user"])){
 		<meta name="description" content="Bridal Registry Website">
 		<meta name="author" content="Rosy Rambani">
 		<!-- Bootstrap CSS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<title>Bowring Bridal Registry</title>
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">Bowring Bridal Registry</a>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
+			<a class="navbar-brand" href="#">Bowring Bridal Registry</a>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="registryhome.php">Create New Registry</a>
+            <a class="nav-link" href="registryhome.php">1. Create New Registry</a>
+          </li>
+          
+          <li class="nav-item active">
+            <a class="nav-link" href="addproducts.php">2. Add Products to Registry</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="searchregistry.php">Search Registry</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="addproducts.php">Add Products to Registry</a>
+            <a class="nav-link" href="searchregistry.php">3. Search and Edit Registry</a>
           </li>
         </ul>
-          <button class="btn btn-danger" type="button"><a href="storelogout.php">Logout</a></button>
-      </div>
-    </nav>
+				<div class="btn-group" role="group">
+    				<a class="button btn btn-warning" href="blank_Bridal_Registry.pdf" target="_blank">Print Registry Form</a>
+    				<a class="button btn btn-danger" href="storelogout.php">Logout</a>
+  				</div>
+			</div>
+		</nav>
 		<!-- <nav class="navbar navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">
-    Bootstrap
-  </a>
-</nav> -->
+			<a class="navbar-brand" href="#">
+				Bootstrap
+			</a>
+		</nav> -->
 		<div class="card border-dark mb-3 cxdata">
 			<div class="card-header">Registry Account Details</div>
 			<div class="card-body text-dark">
 				<div class="row">
 					<h5 class="card-title col-sm-4">Registry Code:</h5>
 					<p class="card-text col-sm-4 text-uppercase" id="registry"><?php echo $RegistryCode;?></p>
-					<!-- <a class="btn btn-outline-success my-2 my-sm-0" type="button" id="copy" onclick="copyText()">Copy</a> -->
+					<span class="d-inline-block" data-placement="top" data-toggle="tooltip" title="Copy Registry Code">
+					<button type="button" class="btn btn-danger" onclick="copyText('#registry')">Copy Registry Code</button>
+					</span>
+					<!-- <a class="btn btn-outline-success my-2 my-sm-0" type="button" id="copy" >Copy</a> -->
 				</div>
 				<div class="row">
 					<h5 class="card-title col-sm-4">Bride's Name:</h5>
@@ -126,9 +132,17 @@ if(!isset($_SESSION["sess_user"])){
 				<button class="btn btn-lg btn-warning btn-block" type="button" id="edit" name="edit" value="edit"><a href="searchregistry.php">Edit Customer Details</a></button>
 			</div>
 		</div>
-		
+		<script type="text/javascript">
+			function copyText(element) {
+				var $temp = $("<input>");
+				$("body").append($temp);
+				$temp.val($(element).text()).select();
+				document.execCommand("Copy");
+				$temp.remove();
+			}
+		</script>
 		<!-- Bootstrap jquery and js files -->
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>

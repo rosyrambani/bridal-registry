@@ -27,16 +27,20 @@ header("location:storelogin.php");
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="registryhome.php">Create New Registry</a>
+            <a class="nav-link" href="registryhome.php">1. Create New Registry</a>
+          </li>
+          
+          <li class="nav-item active">
+            <a class="nav-link" href="addproducts.php">2. Add Products to Registry</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="searchregistry.php">Search Registry</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="addproducts.php">Add Products to Registry</a>
+            <a class="nav-link" href="searchregistry.php">3. Search and Edit Registry</a>
           </li>
         </ul>
-        <button class="btn btn-danger" type="button"><a href="storelogout.php">Logout</a></button>
+        <div class="btn-group" role="group">
+            <a class="button btn btn-warning" href="blank_Bridal_Registry.pdf" target="_blank">Print Registry Form</a>
+            <a class="button btn btn-danger" href="storelogout.php">Logout</a>
+          </div>
       </div>
     </nav>
     <div class="text-center">
@@ -112,7 +116,7 @@ header("location:storelogin.php");
       });
 
 
-      $('#updateform').submit(function(e){
+      $('#addskuform').submit(function(e){
         e.preventDefault();
         console.log("loju");
         var item_regcode = [];
@@ -143,6 +147,9 @@ header("location:storelogin.php");
           data: newProducts,
           success: function(data){
             alert(data);
+            $("#addskuform").remove();
+            var del = '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Data Successfully Saved to the Database!</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+            $('#regdetails').append(del);
            
           }
 
@@ -222,7 +229,7 @@ header("location:storelogin.php");
           </div>
         </div>
       </form>
-      <form name="updateform" id="updateform" class="card form-addsku">
+      <form name="addskuform" id="addskuform" class="card form-addsku">
         <h3 class="form-title">Add Product Details Here</h3>
         <div class="row">
           <div class="col-sm-3">
@@ -251,7 +258,7 @@ header("location:storelogin.php");
         
         <button class="btn btn-primary btn-block" type="submit" id="productadd" name="productadd"><a>Add Above Products to Registry</a></button>
       </form>
-      <span id="insertresult"></span>
+      
       <script>
       searchResult();
       </script>';
