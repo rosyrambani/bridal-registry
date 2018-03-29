@@ -25,7 +25,6 @@ header("location:storelogin.php");
 					<li class="nav-item active">
 						<a class="nav-link" href="registryhome.php">1. Create New Registry</a>
 					</li>
-					
 					<li class="nav-item active">
 						<a class="nav-link" href="addproducts.php">2. Add Products to Registry</a>
 					</li>

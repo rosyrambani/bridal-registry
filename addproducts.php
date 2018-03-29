@@ -103,7 +103,7 @@ header("location:storelogin.php");
         var count = 1;
         $('#addRow').click(function(){
         count = count + 1;
-        var e = '<div class="form-group row" id="row'+count+'"><div class="col-sm-3"><input type="text" name="skunumber" id="skunumber" class="form-control item_sku" placeholder="Product SKU" required></div><div class="col-sm-5"><input type="text" name="description" id="description" class="form-control item_description" placeholder="Description" required></div><div class="col-sm-2"><input type="text" name="quantity" id="quantity" class="form-control item_quantity" placeholder="Quantity" required></div><button class="btn btn-danger btn-block col-sm-2 remove" type="button" data-row="row'+count+'" name="remove">Remove</button></div>';
+        var e = '<div class="form-group row" id="row'+count+'"><div class="col-sm-2"><input type="text" name="skunumber" id="skunumber" class="form-control item_sku" placeholder="SKU" required></div><div class="col-sm-4"><input type="text" name="description" id="description" class="form-control item_description" placeholder="Description" required></div><div class="col-sm-1"><input type="text" name="quantity" id="quantity" class="form-control item_quantity" placeholder="Qty" required></div><div class="col-sm-4"><input type="text" name="notes" id="notes" class="form-control item_notes" placeholder="Notes"></div><button class="btn btn-danger btn-block col-sm-1 remove" type="button" data-row="row'+count+'" name="remove">Clear</button></div>';
         $('#productRow').append(e);
 
         });
@@ -123,6 +123,7 @@ header("location:storelogin.php");
         var item_sku = [];
         var item_description = [];
         var item_quantity = [];
+        var item_notes = [];
 
         $('.item_regcode').each(function(){
           item_regcode.push($(this).val());
@@ -136,8 +137,11 @@ header("location:storelogin.php");
         $('.item_quantity').each(function(){
           item_quantity.push($(this).val());
         });
-        console.log(item_regcode, item_sku, item_description, item_quantity);
-        var newProducts = {item_regcode:item_regcode, item_sku:item_sku, item_description:item_description, item_quantity:item_quantity} ;
+        $('.item_notes').each(function(){
+          item_notes.push($(this).val());
+        });
+        console.log(item_regcode, item_sku, item_description, item_quantity, item_notes);
+        var newProducts = {item_regcode:item_regcode, item_sku:item_sku, item_description:item_description, item_quantity:item_quantity, item_notes:item_notes} ;
         console.log(newProducts);
 
         $.ajax({
@@ -232,31 +236,34 @@ header("location:storelogin.php");
       <form name="addskuform" id="addskuform" class="card form-addsku">
         <h3 class="form-title">Add Product Details Here</h3>
         <div class="row">
-          <div class="col-sm-3">
+          <div class="col-sm-2">
             <label for="regcode" class="form-label">Registry Code:</label>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-2">
             <input type="text" name="regcode" id="regcode" class="form-control item_regcode" placeholder="Registry Code" required readonly>
           </div>
-          <button class="btn btn-success col-sm-4" name="addRow" id="addRow" type="button">Add Row to Enter Product</button>
+          <button class="btn btn-success col-sm-2" name="addRow" id="addRow" type="button">Add Product</button>
         </div>
         <br>
         <div id="productRow">
           <div class="form-group row" id="firstRow">
             
-            <div class="col-sm-3">
-              <input type="text" name="skunumber" id="skunumber" class="form-control item_sku" placeholder="Product SKU" required>
+            <div class="col-sm-2">
+              <input type="number" name="skunumber" id="skunumber" class="form-control item_sku" placeholder="SKU" required>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
               <input type="text" name="description" id="description" class="form-control item_description" placeholder="Description" required>
             </div>
-            <div class="col-sm-2">
-              <input type="text" name="quantity" id="quantity" class="form-control item_quantity" placeholder="Quantity" required>
+            <div class="col-sm-1">
+              <input type="number" name="quantity" id="quantity" class="form-control item_quantity" placeholder="Qty" required>
+            </div>
+            <div class="col-sm-4">
+              <input type="text" name="notes" id="notes" class="form-control item_notes" placeholder="Notes">
             </div>
           </div>
         </div>
         
-        <button class="btn btn-primary btn-block" type="submit" id="productadd" name="productadd"><a>Add Above Products to Registry</a></button>
+        <button class="btn btn-primary btn-block" type="submit" id="productadd" name="productadd"><a>Save Products to Registry</a></button>
       </form>
       
       <script>
