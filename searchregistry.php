@@ -23,19 +23,19 @@ header("location:storelogin.php");
 	if(!mysqli_query($con, $sqldb))
 	{
 		echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-		<strong>Sorry, Data was not saved to the Database!</strong>
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		<span aria-hidden="true">&times;</span>
-		</button>
+			<strong>Sorry, Data was not saved to the Database!</strong>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
 </div>';
 	}
 	else
 	{
 			echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-		<strong>Data Successfully Updated to the Database!</strong>
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		<span aria-hidden="true">&times;</span>
-		</button>
+			<strong>Data Successfully Updated to the Database!</strong>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
 </div>';
 	}
 	header("url=searchregistry.php");
@@ -56,54 +56,48 @@ header("location:storelogin.php");
 		<title>Bowring Bridal Registry</title>
 	</head>
 	<body>
-		<script>
+		<!-- <script>
 		$(document).ready(function(){
 		if ($("#newregistrycode").val() != ''){
 			alert("value not empty");
 			var flag = 1 ;
 			// e.preventDefault();
-
 			$.ajax({
-
 				url: "fetch-products.php",
 				method: "POST",
 				dataType: "json",
 				success: function(data) {
-
 					$('#dbProducts').html(data);
-					// console.log("in ajax");
-					// var obj = $.parseJSON(data);
-
-					// var products;
-					// $.each(obj, function(){
-					// 	products = products + '<div class="form-group row" id="row"><div class="col-sm-2"><input type="text" name="skunumber" id="skunumber" class="form-control item_sku" placeholder="SKU" required></div><div class="col-sm-4"><input type="text" name="description" id="description" class="form-control item_description" placeholder="Description" required></div><div class="col-sm-1"><input type="text" name="quantity" id="quantity" class="form-control item_quantity" placeholder="Qty" required></div><div class="col-sm-4"><input type="text" name="notes" id="notes" class="form-control item_notes" placeholder="Notes"></div><button class="btn btn-danger btn-block col-sm-1 remove" type="button" data-row="row" name="remove">Clear</button></div>';
-					// });
-					// $('#dbProducts').append(products);
+					console.log("in ajax");
+					var obj = $.parseJSON(data);
+					var products;
+					$.each(obj, function(){
+						products = products + '<div class="form-group row" id="row"><div class="col-sm-2"><input type="text" name="skunumber" id="skunumber" class="form-control item_sku" placeholder="SKU" required></div><div class="col-sm-4"><input type="text" name="description" id="description" class="form-control item_description" placeholder="Description" required></div><div class="col-sm-1"><input type="text" name="quantity" id="quantity" class="form-control item_quantity" placeholder="Qty" required></div><div class="col-sm-4"><input type="text" name="notes" id="notes" class="form-control item_notes" placeholder="Notes"></div><button class="btn btn-danger btn-block col-sm-1 remove" type="button" data-row="row" name="remove">Clear</button></div>';
+					});
+					$('#dbProducts').append(products);
 				}
-
-
 			});
-
 		}
 		});
-		</script>
+		</script> -->
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 			<a class="navbar-brand" href="#">Bowring Bridal Registry</a>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
-						<a class="nav-link" href="registryhome.php">1. Create New Registry</a>
+						<a class="nav-link" href="registryhome.php">1. New Registry</a>
 					</li>
 					
 					<li class="nav-item active">
-						<a class="nav-link" href="addproducts.php">2. Add Products to Registry</a>
+						<a class="nav-link" href="addproducts.php">2. Add Products</a>
 					</li>
 					<li class="nav-item active">
 						<a class="nav-link" href="searchregistry.php">3. Search and Edit Registry</a>
 					</li>
+					
 				</ul>
 				<div class="btn-group" role="group">
-					<a class="button btn btn-warning" href="blank_Bridal_Registry.pdf" target="_blank">Print Registry Form</a>
+					<a class="button btn btn-warning" href="blank_Bridal_Registry.pdf" target="_blank">Registry Form</a>
 					<a class="button btn btn-danger" href="storelogout.php">Logout</a>
 				</div>
 				
@@ -111,18 +105,18 @@ header("location:storelogin.php");
 		</nav>
 		
 		<div class="text-center">
-			<form name="search" class="card form-search" method="post" action="">
+			<form name="search" id="search" class="card form-search" method="post" action="">
 				<h2 class="form-title">Search By Registry Code</h2>
 				<div class="form-group row">
-					<input class="form-control col-sm-12" type="text" name="searchcode" placeholder="Enter the Registry Code">
+					<input class="form-control col-sm-6" type="text" name="searchcode" placeholder="Enter the Registry Code">
+					<input class="form-control col-sm-5 offset-1" type="text" id="dbProducts" name="dbProducts" placeholder="Enter the Registry Code">
 					
 				</div>
 				<div class="form-group row">
 					<button class="btn btn-outline-success col-sm-6" name="submitted" type="submit">Customer Details</button>
-					<button class="btn btn-outline-success col-sm-5 offset-1" name="getProducts" type="submit">Products</button>
+					<button class="btn btn-outline-success col-sm-5 offset-1" id="getProducts" name="getProducts" type="submit">Show Products</button>
 				</div>
 			</form>
-			
 			
 			<?php
 			//connect to the database
@@ -173,75 +167,74 @@ header("location:storelogin.php");
 			<?php
 			echo'
 				<form name="updateform" id="updateform" class="card form-registry" method="post" action="searchregistry.php">
-					<h2 class="form-title">Search Results</h2>
-					
-					<div class="form-group row">
-							<label for="newregistrycode" class="col-sm-4 col-form-label">Registry Code:</label>
-							<div class="col-sm-8">
-									<input type="text" name="newregistrycode" id="newregistrycode" class="form-control" placeholder="Registry Code" required readonly>
-							</div>
-					</div>
-					<div class="form-group row">
-							<label for="bride" class="col-sm-4 col-form-label">Bride Name:</label>
-							<div class="col-sm-8">
-									<input type="text" name="newbride" class="form-control" id="newbride" placeholder="Name of Bride" required autofocus>
-							</div>
-					</div>
-					<div class="form-group row">
-							<label for="groom" class="col-sm-4 col-form-label">Groom Name:</label>
-							<div class="col-sm-8">
-									<input type="text" name="newgroom" id="newgroom" class="form-control" placeholder="Name of Groom" required>
-							</div>
-					</div>
-					<div class="form-group row">
-							<label for="phone" class="col-sm-4 col-form-label">Contact Number:</label>
-							<div class="col-sm-8">
-									<input type="text" name="newphone" id="newphone" class="form-control" placeholder="Enter Phone Number" required>
-							</div>
-					</div>
-					<div class="form-group row">
-							<label for="email" class="col-sm-4 col-form-label">Contact Email:</label>
-							<div class="col-sm-8">
-									<input type="email" name="newemail" id="newemail" class="form-control" placeholder="Enter Contact Email">
-							</div>
-					</div>
-					<div class="form-group row">
-							<label for="weddingdate" class="col-sm-4 col-form-label">Date of Wedding:</label>
-							<div class="col-sm-8">
-									<input type="Date" name="newweddingdate" id="newweddingdate" class="form-control" placeholder="Enter Wedding Date">
-							</div>
-					</div>
-					<div class="form-group row">
-							<label for="showersdate" class="col-sm-4 col-form-label">Date of Showers:</label>
-							<div class="col-sm-8">
-									<input type="Date" name="newshowersdate" id="newshowersdate" class="form-control" placeholder="Enter Showers Date">
-							</div>
-					</div>
-					<div class="form-group row">
-							<label for="registrydate" class="col-sm-4 col-form-label">Date of Registry:</label>
-							<div class="col-sm-8">
-									<input type="Date" name="newregistrydate" id="newregistrydate" class="form-control" placeholder="Enter Today Date" required>
-							</div>
-					</div>
-					<div class="form-group row">
-							<label for="store" class="col-sm-4 col-form-label">Store of Registry:</label>
-							<div class="col-sm-8">
-									<input type="text" name="newstore" id="newstore" class="form-control" placeholder="Enter Your Store Number" required>
-							</div>
-					</div>
-					<div class="form-group row">
-							<label for="employeename" class="col-sm-4 col-form-label">Registry Taken By:</label>
-							<div class="col-sm-8">
-									<input type="text" name="newemployeename" id="newemployeename" class="form-control" placeholder="Enter Employee Name" required>
-							</div>
-					</div>
-					<button class="btn btn-lg btn-primary btn-block" type="submit" id="update" name="update" value="update"><a>Update Registry</a></button>
-					
+						<h2 class="form-title">Search Results</h2>
+						
+						<div class="form-group row">
+									<label for="newregistrycode" class="col-sm-4 col-form-label">Registry Code:</label>
+									<div class="col-sm-8">
+												<input type="text" name="newregistrycode" id="newregistrycode" class="form-control" placeholder="Registry Code" required readonly>
+									</div>
+						</div>
+						<div class="form-group row">
+									<label for="bride" class="col-sm-4 col-form-label">Bride Name:</label>
+									<div class="col-sm-8">
+												<input type="text" name="newbride" class="form-control" id="newbride" placeholder="Name of Bride" required autofocus>
+									</div>
+						</div>
+						<div class="form-group row">
+									<label for="groom" class="col-sm-4 col-form-label">Groom Name:</label>
+									<div class="col-sm-8">
+												<input type="text" name="newgroom" id="newgroom" class="form-control" placeholder="Name of Groom" required>
+									</div>
+						</div>
+						<div class="form-group row">
+									<label for="phone" class="col-sm-4 col-form-label">Contact Number:</label>
+									<div class="col-sm-8">
+												<input type="text" name="newphone" id="newphone" class="form-control" placeholder="Enter Phone Number" required>
+									</div>
+						</div>
+						<div class="form-group row">
+									<label for="email" class="col-sm-4 col-form-label">Contact Email:</label>
+									<div class="col-sm-8">
+												<input type="email" name="newemail" id="newemail" class="form-control" placeholder="Enter Contact Email">
+									</div>
+						</div>
+						<div class="form-group row">
+									<label for="weddingdate" class="col-sm-4 col-form-label">Date of Wedding:</label>
+									<div class="col-sm-8">
+												<input type="Date" name="newweddingdate" id="newweddingdate" class="form-control" placeholder="Enter Wedding Date">
+									</div>
+						</div>
+						<div class="form-group row">
+									<label for="showersdate" class="col-sm-4 col-form-label">Date of Showers:</label>
+									<div class="col-sm-8">
+												<input type="Date" name="newshowersdate" id="newshowersdate" class="form-control" placeholder="Enter Showers Date">
+									</div>
+						</div>
+						<div class="form-group row">
+									<label for="registrydate" class="col-sm-4 col-form-label">Date of Registry:</label>
+									<div class="col-sm-8">
+												<input type="Date" name="newregistrydate" id="newregistrydate" class="form-control" placeholder="Enter Today Date" required>
+									</div>
+						</div>
+						<div class="form-group row">
+									<label for="store" class="col-sm-4 col-form-label">Store of Registry:</label>
+									<div class="col-sm-8">
+												<input type="text" name="newstore" id="newstore" class="form-control" placeholder="Enter Your Store Number" required>
+									</div>
+						</div>
+						<div class="form-group row">
+									<label for="employeename" class="col-sm-4 col-form-label">Registry Taken By:</label>
+									<div class="col-sm-8">
+												<input type="text" name="newemployeename" id="newemployeename" class="form-control" placeholder="Enter Employee Name" required>
+									</div>
+						</div>
+						<button class="btn btn-lg btn-primary btn-block" type="submit" id="update" name="update" value="update"><a>Update Registry</a></button>
+						
 			</form>
 			<script>
 				searchResult();
-			</script>
-			<div id="dbProducts"></div>';
+			</script>';
 			}
 			}
 			else {
@@ -255,6 +248,69 @@ header("location:storelogin.php");
 			}
 			?>
 			
+			<form name="productsForm" id="productsForm" class="card form-addsku" style="display: none;">
+				<h3 class="form-title">Products in this Registry</h3>
+				<div class="row">
+					<div class="col-sm-2">
+						<label for="regcode" class="form-label">Registry Code:</label>
+					</div>
+					<div class="col-sm-2">
+						<input type="text" name="regcode" id="regcode" class="form-control" readonly>
+					</div>
+					
+				</div>
+				<br>
+				<table class="table table-bordered table-hover">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Product SKU</th>
+							<th scope="col">Description</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">Notes</th>
+							<th scope="col">Gifted</th>
+						</tr>
+					</thead>
+					<tbody id="showProducts">
+					</tbody>
+				</table>
+				<button class="btn btn-danger" id="updateProducts" name="updateProducts" type="submit">Update Changes to the Products</button>
+			</form>
+			
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$("#getProducts").click(function(e) {
+						e.preventDefault();
+						$(this).prop('disabled', true);
+						var reg = document.getElementById("dbProducts").value;
+					
+					$.ajax({
+						
+						type: 'post',
+						url: 'fetch-products.php',
+						data: {
+							registryCode:reg
+						},
+						success: function (response) {
+							if(response == '0')
+							{
+								// alert("no available data");
+								var err = '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>No Products with this Registry Code</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+								$('#search').append(err);
+							}
+							else {
+							console.log(response);
+							// document.getElementById("showProducts").contentEditable = true;
+							$("#productsForm").css("display", "block");
+							var content = document.getElementById("showProducts");
+							content.innerHTML = content.innerHTML+response;
+							document.getElementById("regcode").value = reg;
+						}
+						}
+					});
+					});
+				});
+				
+			</script>
 			
 		</div>
 		

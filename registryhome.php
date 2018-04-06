@@ -23,10 +23,10 @@ header("location:storelogin.php");
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
-						<a class="nav-link" href="registryhome.php">1. Create New Registry</a>
+						<a class="nav-link" href="registryhome.php">1. New Registry</a>
 					</li>
 					<li class="nav-item active">
-						<a class="nav-link" href="addproducts.php">2. Add Products to Registry</a>
+						<a class="nav-link" href="addproducts.php">2. Add Products</a>
 					</li>
 					<li class="nav-item active">
 						<a class="nav-link" href="searchregistry.php">3. Search and Edit Registry</a>
