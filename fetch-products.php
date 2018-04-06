@@ -13,12 +13,12 @@
 				{
 				while($row=mysqli_fetch_array($result))
 				{
-					echo "<tr contenteditable='true'>";
-					echo "<td>".$row['SKUNUMBER']."</td>";
-					echo "<td>".$row['DESCRIPTION']."</td>";
-					echo "<td>".$row['QUANTITY']."</td>";
-					echo "<td>".$row['NOTES']."</td>";
-					echo "<td>".$row['GIFTED']."</td>";
+					echo "<tr class='row' contenteditable='true'>";
+					echo "<td class='col-sm-2 item_sku'>".$row['SKUNUMBER']."</td>";
+					echo "<td class='col-sm-4 item_description'>".$row['DESCRIPTION']."</td>";
+					echo "<td class='col-sm-1 item_quantity'>".$row['QUANTITY']."</td>";
+					echo "<td class='col-sm-4 item_notes'>".$row['NOTES']."</td>";
+					echo "<td class='col-sm-1 item_gifted'>".$row['GIFTED']."</td>";
 					echo "</tr>";
 				}
 			}

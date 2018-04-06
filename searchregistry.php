@@ -56,30 +56,7 @@ header("location:storelogin.php");
 		<title>Bowring Bridal Registry</title>
 	</head>
 	<body>
-		<!-- <script>
-		$(document).ready(function(){
-		if ($("#newregistrycode").val() != ''){
-			alert("value not empty");
-			var flag = 1 ;
-			// e.preventDefault();
-			$.ajax({
-				url: "fetch-products.php",
-				method: "POST",
-				dataType: "json",
-				success: function(data) {
-					$('#dbProducts').html(data);
-					console.log("in ajax");
-					var obj = $.parseJSON(data);
-					var products;
-					$.each(obj, function(){
-						products = products + '<div class="form-group row" id="row"><div class="col-sm-2"><input type="text" name="skunumber" id="skunumber" class="form-control item_sku" placeholder="SKU" required></div><div class="col-sm-4"><input type="text" name="description" id="description" class="form-control item_description" placeholder="Description" required></div><div class="col-sm-1"><input type="text" name="quantity" id="quantity" class="form-control item_quantity" placeholder="Qty" required></div><div class="col-sm-4"><input type="text" name="notes" id="notes" class="form-control item_notes" placeholder="Notes"></div><button class="btn btn-danger btn-block col-sm-1 remove" type="button" data-row="row" name="remove">Clear</button></div>';
-					});
-					$('#dbProducts').append(products);
-				}
-			});
-		}
-		});
-		</script> -->
+		
 		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 			<a class="navbar-brand" href="#">Bowring Bridal Registry</a>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
@@ -262,12 +239,12 @@ header("location:storelogin.php");
 				<br>
 				<table class="table table-bordered table-hover">
 					<thead class="thead-light">
-						<tr>
-							<th scope="col">Product SKU</th>
-							<th scope="col">Description</th>
-							<th scope="col">Quantity</th>
-							<th scope="col">Notes</th>
-							<th scope="col">Gifted</th>
+						<tr class="row">
+							<th class="col-sm-2" scope="col">Product SKU</th>
+							<th class="col-sm-4" scope="col">Description</th>
+							<th class="col-sm-1" scope="col">Quantity</th>
+							<th class="col-sm-4" scope="col">Notes</th>
+							<th class="col-sm-1" scope="col">Gifted</th>
 						</tr>
 					</thead>
 					<tbody id="showProducts">
@@ -308,6 +285,46 @@ header("location:storelogin.php");
 						}
 					});
 					});
+
+					$("#updateProducts").click(function(e){
+						e.preventDefault();
+						console.log("update clicked");
+
+						var item_sku = [];
+						var item_description = [];
+						var item_quantity = [];
+						var item_notes = [];
+						var item_gifted = [];
+
+						$('.item_sku').each(function(){
+							item_sku.push($(this).val());
+						});
+						$('.item_description').each(function(){
+							item_description.push($(this).val());
+						});
+						$('.item_quantity').each(function(){
+							item_quantity.push($(this).val());
+						});
+						$('.item_notes').each(function(){
+							item_notes.push($(this).val());
+						});
+						$('.item_gifted').each(function(){
+							item_gifted.push($(this).val());
+						});
+
+						$.ajax({
+
+							type: 'post',
+							url: 'update-products.php',
+							data: {
+
+							},
+							success: function (response) {
+
+							} 
+						});
+					});
+
 				});
 				
 			</script>
