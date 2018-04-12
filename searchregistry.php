@@ -86,12 +86,13 @@ header("location:storelogin.php");
 				<h2 class="form-title">Search By Registry Code</h2>
 				<div class="form-group row">
 					<input class="form-control col-sm-6" type="text" name="searchcode" placeholder="Enter the Registry Code">
-					<input class="form-control col-sm-5 offset-1" type="text" id="dbProducts" name="dbProducts" placeholder="Enter the Registry Code">
+					<button class="btn btn-outline-success col-sm-6" name="submitted" type="submit">Customer Details</button>
 					
 				</div>
 				<div class="form-group row">
-					<button class="btn btn-outline-success col-sm-6" name="submitted" type="submit">Customer Details</button>
-					<button class="btn btn-outline-success col-sm-5 offset-1" id="getProducts" name="getProducts" type="submit">Show Products</button>
+					
+					<input class="form-control col-sm-6" type="text" id="dbProducts" name="dbProducts" placeholder="Enter the Registry Code">
+					<button class="btn btn-outline-success col-sm-6" id="getProducts" name="getProducts" type="button">Show Products</button>
 				</div>
 			</form>
 			
@@ -232,19 +233,20 @@ header("location:storelogin.php");
 						<label for="regcode" class="form-label">Registry Code:</label>
 					</div>
 					<div class="col-sm-2">
-						<input type="text" name="regcode" id="regcode" class="form-control" readonly>
+						<input type="text" name="regcode" id="regcode" class="form-control item_regcode" readonly>
 					</div>
 					
 				</div>
 				<br>
-				<table class="table table-bordered table-hover">
+				<table class="table table-hover">
 					<thead class="thead-light">
 						<tr class="row">
-							<th class="col-sm-2" scope="col">Product SKU</th>
-							<th class="col-sm-4" scope="col">Description</th>
-							<th class="col-sm-1" scope="col">Quantity</th>
-							<th class="col-sm-4" scope="col">Notes</th>
-							<th class="col-sm-1" scope="col">Gifted</th>
+							<th class="col-md-1" scope="col">Product SKU</th>
+							<th class="col-md-4" scope="col">Description</th>
+							<th class="col-md-1" scope="col">Quantity</th>
+							<th class="col-md-4" scope="col">Notes</th>
+							<th class="col-md-1" scope="col">Gifted</th>
+							<th class="col-md-1" scope="col">Remove</th>
 						</tr>
 					</thead>
 					<tbody id="showProducts">
@@ -273,6 +275,7 @@ header("location:storelogin.php");
 								// alert("no available data");
 								var err = '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>No Products with this Registry Code</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
 								$('#search').append(err);
+								$('#getProducts').prop('disabled', false);
 							}
 							else {
 							console.log(response);
@@ -286,41 +289,80 @@ header("location:storelogin.php");
 					});
 					});
 
-					$("#updateProducts").click(function(e){
+					$(document).on('click', '.removeProduct', function(){
+						
+						// alert("remove clicked");
+						console.log("remove product button clicked");
+						var rowId = this.id;
+						console.log(rowId);
+						var item_regcode = $("#regcode").val();
+						var item_sku = $(this).closest("tr").find(".item_sku").text();
+						var productRow = {item_regcode:item_regcode, item_sku:item_sku};
+						console.log(productRow);
+						$.ajax({
+							method: "POST",
+							url: "delete-product.php",
+							data: productRow,
+							success: function(response){
+								console.log(response);
+								if(response == 1)
+								{
+									$('#' + rowId).parent().parent().remove();
+									var del = '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Product Successfully Removed!</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+            					$('#search').append(del);
+								}
+								if(response == 0)
+								{
+
+								}
+							}
+						});
+					});
+
+					$('#updateProducts').click(function(e){
 						e.preventDefault();
 						console.log("update clicked");
 
+						var item_regcode = [];
 						var item_sku = [];
 						var item_description = [];
 						var item_quantity = [];
 						var item_notes = [];
 						var item_gifted = [];
 
-						$('.item_sku').each(function(){
-							item_sku.push($(this).val());
+						$('#regcode').each(function(){
+							item_regcode.push($(this).val());
+						});
+						$('.item_sku').each(function(){ 
+							item_sku.push($(this).text());
 						});
 						$('.item_description').each(function(){
-							item_description.push($(this).val());
+							item_description.push($(this).text());
 						});
 						$('.item_quantity').each(function(){
-							item_quantity.push($(this).val());
+							item_quantity.push($(this).text());
 						});
 						$('.item_notes').each(function(){
-							item_notes.push($(this).val());
+							item_notes.push($(this).text());
 						});
 						$('.item_gifted').each(function(){
-							item_gifted.push($(this).val());
+							item_gifted.push($(this).text());
 						});
+						console.log(item_regcode, item_sku, item_description, item_quantity, item_notes, item_gifted);
+						var productsUpdated = {item_regcode:item_regcode, item_sku:item_sku, item_description:item_description, item_quantity:item_quantity, item_notes:item_notes, item_gifted:item_gifted} ;
+						console.log(productsUpdated);
 
 						$.ajax({
 
-							type: 'post',
-							url: 'update-products.php',
-							data: {
-
-							},
-							success: function (response) {
-
+							method: "POST",
+							url: "update-products.php",
+							data: productsUpdated,
+							success: function(response){
+								// alert(response);
+								console.log(response);
+								$("#productsForm").remove();
+            					var del = '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Products Successfully Updated!</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+            					$('#search').append(del);
 							} 
 						});
 					});

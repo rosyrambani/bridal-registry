@@ -103,7 +103,7 @@ header("location:storelogin.php");
         var count = 1;
         $('#addRow').click(function(){
         count = count + 1;
-        var e = '<div class="form-group row" id="row'+count+'"><div class="col-sm-2"><input type="text" name="skunumber" id="skunumber" class="form-control item_sku" placeholder="SKU" required></div><div class="col-sm-4"><input type="text" name="description" id="description" class="form-control item_description" placeholder="Description" required></div><div class="col-sm-1"><input type="text" name="quantity" id="quantity" class="form-control item_quantity" placeholder="Qty" required></div><div class="col-sm-4"><input type="text" name="notes" id="notes" class="form-control item_notes" placeholder="Notes"></div><button class="btn btn-danger btn-block col-sm-1 remove" type="button" data-row="row'+count+'" name="remove">Clear</button></div>';
+        var e = '<div class="form-group row" id="row'+count+'"><div class="col-sm-2"><input type="number" name="skunumber" id="skunumber'+count+'" class="form-control item_sku" placeholder="SKU" required></div><div class="col-sm-4"><input type="text" name="description" id="description'+count+'" class="form-control item_description" placeholder="Description" required readonly></div><div class="col-sm-1"><input type="number" name="quantity" id="quantity" class="form-control item_quantity" placeholder="Qty" required></div><div class="col-sm-4"><input type="text" name="notes" id="notes" class="form-control item_notes" placeholder="Notes"></div><button class="btn btn-danger btn-block col-sm-1 remove" type="button" data-row="row'+count+'" name="remove">Clear</button></div>';
         $('#productRow').append(e);
 
         });
@@ -113,6 +113,40 @@ header("location:storelogin.php");
         var delete_row = $(this).parent().attr('id');
         // alert(delete_row);
         $('#' + delete_row).remove();
+      });
+
+      $(document).on('keypress', '.item_description', function(){
+
+       var descriptionId = $(this).attr('id');
+       console.log(descriptionId);
+
+       var item_sku = $(this).closest(".row").find(".item_sku").val();
+       console.log(item_sku);
+
+       var sku = {item_sku:item_sku};
+       console.log(sku);
+       $.ajax({
+        url: "fetch-description.php",
+        method: "POST",
+        data: sku,
+        success: function(ret){
+
+          if(ret == 0)
+          {
+            alert("Please enter the right SKU number");
+
+          }
+          else{
+          console.log(ret);
+          // alert(ret);
+          var descriptionDb = ret;
+          $('#' + descriptionId).val(descriptionDb);
+
+        }
+
+        }
+       });
+
       });
 
 
@@ -150,7 +184,7 @@ header("location:storelogin.php");
           method: "POST",
           data: newProducts,
           success: function(data){
-            alert(data);
+            // alert(data);
             $("#addskuform").remove();
             var del = '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Data Successfully Saved to the Database!</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
             $('#regdetails').append(del);
@@ -249,10 +283,10 @@ header("location:storelogin.php");
           <div class="form-group row" id="firstRow">
             
             <div class="col-sm-2">
-              <input type="number" name="skunumber" id="skunumber" class="form-control item_sku" placeholder="SKU" required>
+              <input type="number" name="skunumber" id="skunumber1" class="form-control item_sku" placeholder="SKU" required>
             </div>
             <div class="col-sm-4">
-              <input type="text" name="description" id="description" class="form-control item_description" placeholder="Description" required>
+              <input type="text" name="description" id="description1" class="form-control item_description" placeholder="Description" required readonly>
             </div>
             <div class="col-sm-1">
               <input type="number" name="quantity" id="quantity" class="form-control item_quantity" placeholder="Qty" required>
