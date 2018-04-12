@@ -4,43 +4,6 @@ if(!isset($_SESSION["sess_user"])){
 header("location:storelogin.php");
 } else {
 ?>
-<?php
-	include ('connect.php');
-	if (isset($_POST['update'])) {
-	$NewBride = $_POST['newbride'];
-	$NewGroom = $_POST['newgroom'];
-	$NewPhone = $_POST['newphone'];
-	$NewEmail = $_POST['newemail'];
-	$NewWeddingDate = $_POST['newweddingdate'];
-	$NewShowersDate = $_POST['newshowersdate'];
-	$NewRegistryDate = $_POST['newregistrydate'];
-	$NewStore = $_POST['newstore'];
-	$NewEmployeeName = $_POST['newemployeename'];
-	$RegistryCode = $_POST['newregistrycode'];
-	//select query
-	$sqldb = "UPDATE CUSTOMERINFO SET BRIDE = '$NewBride', GROOM = '$NewGroom', PHONE = '$NewPhone', EMAIL = '$NewEmail', WEDDINGDATE = '$NewWeddingDate', SHOWERSDATE = '$NewShowersDate', REGISTRYDATE = '$NewRegistryDate', STORE = '$NewStore', EMPLOYEENAME = '$NewEmployeeName' WHERE REGISTRYCODE = '$RegistryCode'";
-	
-	if(!mysqli_query($con, $sqldb))
-	{
-		echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-			<strong>Sorry, Data was not saved to the Database!</strong>
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-			</button>
-</div>';
-	}
-	else
-	{
-			echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-			<strong>Data Successfully Updated to the Database!</strong>
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-			</button>
-</div>';
-	}
-	header("url=searchregistry.php");
-	}
-?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -85,8 +48,8 @@ header("location:storelogin.php");
 			<form name="search" id="search" class="card form-search" method="post" action="">
 				<h2 class="form-title">Search By Registry Code</h2>
 				<div class="form-group row">
-					<input class="form-control col-sm-6" type="text" name="searchcode" placeholder="Enter the Registry Code">
-					<button class="btn btn-outline-success col-sm-6" name="submitted" type="submit">Customer Details</button>
+					<input class="form-control col-sm-6" type="text" id="searchcode" name="searchcode" placeholder="Enter the Registry Code">
+					<button class="btn btn-outline-success col-sm-6" id="getCxDetails" name="getCxDetails" type="submit">Customer Details</button>
 					
 				</div>
 				<div class="form-group row">
@@ -96,135 +59,74 @@ header("location:storelogin.php");
 				</div>
 			</form>
 			
-			<?php
-			//connect to the database
-			include('connect.php');
-			if (isset($_POST['submitted'])) {
-				$SearchCode = $_POST['searchcode'];
-				$BrideDb = "";
-				$GroomDb = "";
-				$PhoneDb = "";
-				$EmailDb = "";
-				$WeddingDb = "";
-				$ShowersDb = "";
-				$RegistryDb = "";
-				$StoreDb = "";
-				$EmployeeDb = "";
-				$query = "SELECT * FROM CUSTOMERINFO WHERE REGISTRYCODE = '$SearchCode'";
-				$result = mysqli_query($con, $query) or die('error getting data');
-				if(mysqli_num_rows($result) > 0) {
-					while($row = mysqli_fetch_assoc($result)) {
-						$SearchCode = $row['REGISTRYCODE'];
-						$BrideDb = $row['BRIDE'];
-						$GroomDb = $row['GROOM'];
-						$PhoneDb = $row['PHONE'];
-						$EmailDb = $row['EMAIL'];
-						$WeddingDb = $row['WEDDINGDATE'];
-						$ShowersDb = $row['SHOWERSDATE'];
-						$RegistryDb = $row['REGISTRYDATE'];
-						$StoreDb = $row['STORE'];
-						$EmployeeDb = $row['EMPLOYEENAME'];
-						
-			?>
-			<script type="text/javascript">
-			function searchResult() {
 			
-			document.getElementById("newregistrycode").value = "<?php echo $SearchCode;?>";
-			document.getElementById("newbride").value = "<?php echo $BrideDb;?>";
-			document.getElementById("newgroom").value = "<?php echo $GroomDb;?>";
-			document.getElementById("newphone").value = "<?php echo $PhoneDb;?>";
-			document.getElementById("newemail").value = "<?php echo $EmailDb;?>";
-			document.getElementById("newweddingdate").value = "<?php echo $WeddingDb;?>";
-			document.getElementById("newshowersdate").value = "<?php echo $ShowersDb;?>";
-			document.getElementById("newregistrydate").value = "<?php echo $RegistryDb;?>";
-			document.getElementById("newstore").value = "<?php echo $StoreDb;?>";
-			document.getElementById("newemployeename").value = "<?php echo $EmployeeDb;?>";
 			
-			}
-			</script>
-			<?php
-			echo'
-				<form name="updateform" id="updateform" class="card form-registry" method="post" action="searchregistry.php">
-						<h2 class="form-title">Search Results</h2>
-						
-						<div class="form-group row">
-									<label for="newregistrycode" class="col-sm-4 col-form-label">Registry Code:</label>
-									<div class="col-sm-8">
-												<input type="text" name="newregistrycode" id="newregistrycode" class="form-control" placeholder="Registry Code" required readonly>
-									</div>
-						</div>
-						<div class="form-group row">
-									<label for="bride" class="col-sm-4 col-form-label">Bride Name:</label>
-									<div class="col-sm-8">
-												<input type="text" name="newbride" class="form-control" id="newbride" placeholder="Name of Bride" required autofocus>
-									</div>
-						</div>
-						<div class="form-group row">
-									<label for="groom" class="col-sm-4 col-form-label">Groom Name:</label>
-									<div class="col-sm-8">
-												<input type="text" name="newgroom" id="newgroom" class="form-control" placeholder="Name of Groom" required>
-									</div>
-						</div>
-						<div class="form-group row">
-									<label for="phone" class="col-sm-4 col-form-label">Contact Number:</label>
-									<div class="col-sm-8">
-												<input type="text" name="newphone" id="newphone" class="form-control" placeholder="Enter Phone Number" required>
-									</div>
-						</div>
-						<div class="form-group row">
-									<label for="email" class="col-sm-4 col-form-label">Contact Email:</label>
-									<div class="col-sm-8">
-												<input type="email" name="newemail" id="newemail" class="form-control" placeholder="Enter Contact Email">
-									</div>
-						</div>
-						<div class="form-group row">
-									<label for="weddingdate" class="col-sm-4 col-form-label">Date of Wedding:</label>
-									<div class="col-sm-8">
-												<input type="Date" name="newweddingdate" id="newweddingdate" class="form-control" placeholder="Enter Wedding Date">
-									</div>
-						</div>
-						<div class="form-group row">
-									<label for="showersdate" class="col-sm-4 col-form-label">Date of Showers:</label>
-									<div class="col-sm-8">
-												<input type="Date" name="newshowersdate" id="newshowersdate" class="form-control" placeholder="Enter Showers Date">
-									</div>
-						</div>
-						<div class="form-group row">
-									<label for="registrydate" class="col-sm-4 col-form-label">Date of Registry:</label>
-									<div class="col-sm-8">
-												<input type="Date" name="newregistrydate" id="newregistrydate" class="form-control" placeholder="Enter Today Date" required>
-									</div>
-						</div>
-						<div class="form-group row">
-									<label for="store" class="col-sm-4 col-form-label">Store of Registry:</label>
-									<div class="col-sm-8">
-												<input type="text" name="newstore" id="newstore" class="form-control" placeholder="Enter Your Store Number" required>
-									</div>
-						</div>
-						<div class="form-group row">
-									<label for="employeename" class="col-sm-4 col-form-label">Registry Taken By:</label>
-									<div class="col-sm-8">
-												<input type="text" name="newemployeename" id="newemployeename" class="form-control" placeholder="Enter Employee Name" required>
-									</div>
-						</div>
-						<button class="btn btn-lg btn-primary btn-block" type="submit" id="update" name="update" value="update"><a>Update Registry</a></button>
-						
+			<form name="updateform" id="updateform" class="card form-registry" method="post" action="" style="display: none;">
+				<h2 class="form-title">Search Results</h2>
+				
+				<div class="form-group row">
+					<label for="newregistrycode" class="col-sm-4 col-form-label">Registry Code:</label>
+					<div class="col-sm-8">
+						<input type="text" name="newregistrycode" id="newregistrycode" class="form-control" placeholder="Registry Code" required readonly>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="newbride" class="col-sm-4 col-form-label">Bride Name:</label>
+					<div class="col-sm-8">
+						<input type="text" name="newbride" class="form-control" id="newbride" placeholder="Name of Bride" required autofocus>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="newgroom" class="col-sm-4 col-form-label">Groom Name:</label>
+					<div class="col-sm-8">
+						<input type="text" name="newgroom" id="newgroom" class="form-control" placeholder="Name of Groom" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="newphone" class="col-sm-4 col-form-label">Contact Number:</label>
+					<div class="col-sm-8">
+						<input type="text" name="newphone" id="newphone" class="form-control" placeholder="Enter Phone Number" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="newemail" class="col-sm-4 col-form-label">Contact Email:</label>
+					<div class="col-sm-8">
+						<input type="email" name="newemail" id="newemail" class="form-control" placeholder="Enter Contact Email">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="newweddingdate" class="col-sm-4 col-form-label">Date of Wedding:</label>
+					<div class="col-sm-8">
+						<input type="Date" name="newweddingdate" id="newweddingdate" class="form-control" placeholder="Enter Wedding Date">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="newshowersdate" class="col-sm-4 col-form-label">Date of Showers:</label>
+					<div class="col-sm-8">
+						<input type="Date" name="newshowersdate" id="newshowersdate" class="form-control" placeholder="Enter Showers Date">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="newregistrydate" class="col-sm-4 col-form-label">Date of Registry:</label>
+					<div class="col-sm-8">
+						<input type="Date" name="newregistrydate" id="newregistrydate" class="form-control" placeholder="Enter Today Date" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="newstore" class="col-sm-4 col-form-label">Store of Registry:</label>
+					<div class="col-sm-8">
+						<input type="text" name="newstore" id="newstore" class="form-control" placeholder="Enter Your Store Number" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="newemployeename" class="col-sm-4 col-form-label">Registry Taken By:</label>
+					<div class="col-sm-8">
+						<input type="text" name="newemployeename" id="newemployeename" class="form-control" placeholder="Enter Employee Name" required>
+					</div>
+				</div>
+				<button class="btn btn-lg btn-primary btn-block" type="submit" id="update" name="update" value="update"><a>Update Registry</a></button>
+				
 			</form>
-			<script>
-				searchResult();
-			</script>';
-			}
-			}
-			else {
-			echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-				<strong>Make Sure you have entered right Registry Code</strong>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-				</button>
-			</div>';
-			}
-			}
-			?>
 			
 			<form name="productsForm" id="productsForm" class="card form-addsku" style="display: none;">
 				<h3 class="form-title">Products in this Registry</h3>
@@ -257,6 +159,84 @@ header("location:storelogin.php");
 			
 			<script type="text/javascript">
 				$(document).ready(function(){
+					$("#update").click(function(e){
+						e.preventDefault();
+						var newregistrycode = document.getElementById("newregistrycode").value;
+						var newbride = document.getElementById("newbride").value;
+						var newgroom = document.getElementById("newgroom").value;
+						var newphone = document.getElementById("newphone").value;
+						var newemail = document.getElementById("newemail").value;
+						var newweddingdate = document.getElementById("newweddingdate").value;
+						var newshowersdate = document.getElementById("newshowersdate").value;
+						var newregistrydate = document.getElementById("newregistrydate").value;
+						var newstore = document.getElementById("newstore").value;
+						var newemployeename = document.getElementById("newemployeename").value;
+						$.ajax({
+							type: 'post',
+							url: 'update-cxdetails.php',
+							data: {
+								newregistrycode:newregistrycode, newbride:newbride, newgroom:newgroom, newphone:newphone, newemail:newemail, newweddingdate:newweddingdate, newshowersdate:newshowersdate, newregistrydate:newregistrydate, newstore:newstore, newemployeename:newemployeename
+							},
+							success: function(response){
+								if(response == '1')
+								{
+									$("#updateform").remove();
+									var done = '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Data Successfully Updated to the Database!</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+									$('#search').append(done);
+								}
+								else {
+									var err = '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Sorry, Data was not saved to the Database!</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+									$('#search').append(err);
+								}
+							}
+						});
+					});
+					$("#getCxDetails").click(function(e){
+						e.preventDefault();
+						$(this).prop('disabled',true);
+						var reg = document.getElementById("searchcode").value;
+					$.ajax({
+						type: 'post',
+						url: 'fetch-cxdetails.php',
+						data: {
+							registryCode:reg
+						},
+						dataType: 'json',
+						success: function (response) {
+							if(response == '0')
+							{
+								var err = '<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>Make sure you have entered correct registry code.</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+								$('#search').append(err);
+								$('#getProducts').prop('disabled', false);
+							}
+							else {
+								console.log(response);
+								$("#updateform").css("display", "block");
+								var regCodeDb = response.REGISTRYCODE;
+								var bride = response.BRIDE;
+								var groom = response.GROOM;
+								var phone = response.PHONE;
+								var email = response.EMAIL;
+								var wedding = response.WEDDINGDATE;
+								var showers = response.SHOWERSDATE;
+								var registry = response.REGISTRYDATE;
+								var store = response.STORE;
+								var employee = response.EMPLOYEENAME;
+								document.getElementById("newregistrycode").value = regCodeDb;
+								document.getElementById("newbride").value = bride;
+								document.getElementById("newgroom").value = groom;
+								document.getElementById("newphone").value = phone;
+								document.getElementById("newemail").value = email;
+								document.getElementById("newweddingdate").value = wedding;
+								document.getElementById("newshowersdate").value = showers;
+								document.getElementById("newregistrydate").value = registry;
+								document.getElementById("newstore").value = store;
+								document.getElementById("newemployeename").value = employee;
+								
+							}
+						}
+					});
+					});
 					$("#getProducts").click(function(e) {
 						e.preventDefault();
 						$(this).prop('disabled', true);
@@ -288,7 +268,6 @@ header("location:storelogin.php");
 						}
 					});
 					});
-
 					$(document).on('click', '.removeProduct', function(){
 						
 						// alert("remove clicked");
@@ -309,31 +288,27 @@ header("location:storelogin.php");
 								{
 									$('#' + rowId).parent().parent().remove();
 									var del = '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Product Successfully Removed!</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-            					$('#search').append(del);
+					$('#search').append(del);
 								}
 								if(response == 0)
 								{
-
 								}
 							}
 						});
 					});
-
 					$('#updateProducts').click(function(e){
 						e.preventDefault();
 						console.log("update clicked");
-
 						var item_regcode = [];
 						var item_sku = [];
 						var item_description = [];
 						var item_quantity = [];
 						var item_notes = [];
 						var item_gifted = [];
-
 						$('#regcode').each(function(){
 							item_regcode.push($(this).val());
 						});
-						$('.item_sku').each(function(){ 
+						$('.item_sku').each(function(){
 							item_sku.push($(this).text());
 						});
 						$('.item_description').each(function(){
@@ -351,9 +326,7 @@ header("location:storelogin.php");
 						console.log(item_regcode, item_sku, item_description, item_quantity, item_notes, item_gifted);
 						var productsUpdated = {item_regcode:item_regcode, item_sku:item_sku, item_description:item_description, item_quantity:item_quantity, item_notes:item_notes, item_gifted:item_gifted} ;
 						console.log(productsUpdated);
-
 						$.ajax({
-
 							method: "POST",
 							url: "update-products.php",
 							data: productsUpdated,
@@ -361,12 +334,11 @@ header("location:storelogin.php");
 								// alert(response);
 								console.log(response);
 								$("#productsForm").remove();
-            					var del = '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Products Successfully Updated!</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-            					$('#search').append(del);
-							} 
+					var del = '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Products Successfully Updated!</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+					$('#search').append(del);
+							}
 						});
 					});
-
 				});
 				
 			</script>
